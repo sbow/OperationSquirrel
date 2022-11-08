@@ -27,3 +27,15 @@
 ### Get this repo and run - on nano
 - ```me@myNano: ~/$ sudo docker pull shaunbdockerhub/hellocppcmake:v1```
 - ```me@myNano: ~/$ sudo docker run -it shaunbdockerhub/hellocppcmake:v1```
+
+
+
+# Resources for getting unstuck
+
+- Base container from nVidia: [website](https://catalog.ngc.nvidia.com/orgs/nvidia/containers/l4t-base?fbclid=IwAR1rJIqQXpaxa2ALgR_0bP07PYeaTo_A_E7_9tW1ygnpqrIYCYaEinoCj1c). Dockerfile base container FROM resource: nvcr.io/nvidia/l4t-base:r32.7.1
+
+- Docker Desktop WSL backend on windows: [website](https://docs.docker.com/desktop/windows/wsl/?fbclid=IwAR0XdHzFS4EzO9O1qG2s_te46MHLsCdnBWc5063oZ2Q8Hvgx77eVYwBPkn8)
+
+- Good example for getting Docker Compose / docker running / verified on jetson: [website] (https://collabnix.com/running-docker-compose-on-nvidia-jetson-nano-in-5-minutes/?fbclid=IwAR2-gQTrZbgrjfC3ijQWeiMHW2C64Nsc3qzUo1VJR1vio6ayBVzZvoDj-d4)
+
+- Good example for getting cross compiling docker image from wsl / x86 to Nano. However, note their example requires a specific camera. It is better to use this example instead, basically a "hello world". [website] (https://collabnix.com/running-docker-compose-on-nvidia-jetson-nano-in-5-minutes/?fbclid=IwAR2-gQTrZbgrjfC3ijQWeiMHW2C64Nsc3qzUo1VJR1vio6ayBVzZvoDj-d4)
