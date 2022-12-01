@@ -6,17 +6,7 @@
 // NVIDIA Jetson Nano Developer Kit using OpenCV
 // Drivers for the camera and OpenCV are included in the base image
 
-#include <opencv2/opencv.hpp>
-#include <opencv2/core/core.hpp>
-#include <opencv2/videoio.hpp>
-#include <opencv2/video.hpp>
-#include <opencv2/imgproc.hpp>
-#include <opencv2/videoio.hpp>
-#include <opencv2/highgui.hpp>
-#include <opencv2/gapi.hpp>
-#include <opencv2/gapi/core.hpp>
-#include <opencv2/gapi/imgproc.hpp>
-#include <opencv2/gapi/streaming/cap.hpp>
+#include <opencv.hpp>
 
 std::string gstreamer_pipeline (int capture_width, int capture_height, int display_width, int display_height, int framerate, int flip_method) {
     return "nvarguscamerasrc ! video/x-raw(memory:NVMM), width=(int)" + std::to_string(capture_width) + ", height=(int)" +

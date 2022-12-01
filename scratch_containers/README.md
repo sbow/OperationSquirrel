@@ -1,0 +1,2 @@
+# About
+This folder contains scratch containers that are not yet ready for the main development of Operation Squirrel code.  It is essentially a sandbox where different containers can be created and tested.  Each subfolder shall contain the necessary depencies to build a container.

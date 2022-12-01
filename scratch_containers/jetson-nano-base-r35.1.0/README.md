@@ -1,0 +1,2 @@
+# About
+This container is based off of an NVIDIA container found at "https://gitlab.com/nvidia/container-images/l4t-jetpack".  In the "jetson-nano-dev-r35.1.0" folder, execute the make file with the appropriate arguments .  That container was then re-tagged as "cameroncrose72/jetson-nano-test:base_image_r35.1.0" and pushed to Docker hub.

@@ -1,0 +1,2 @@
+# About
+This container is based off of Attila Door's container found at "https://github.com/attiladoor/jetson-nano-dev".  In the "jetson-nano-dev-attila" folder, execute the make file with the appropriate arguments (arm 18 build - since using Ubuntu 18.04).  That container was then re-tagged as "cameroncrose72/jetson-nano-test:base_image_attila" and pushed to Docker hub.

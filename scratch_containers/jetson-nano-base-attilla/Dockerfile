@@ -1,5 +1,5 @@
 # Specify the parent image from which we build
-FROM cameroncrose72/jetson-nano-test:base_image
+FROM cameroncrose72/jetson-nano-test:base_image_attila
 
 # Keep the container running
 #ENTRYPOINT ["tail", "-f", "/dev/null"]
