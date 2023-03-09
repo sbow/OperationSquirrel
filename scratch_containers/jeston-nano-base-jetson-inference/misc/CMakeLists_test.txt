@@ -1,0 +1,36 @@
+# CMake minimum version
+cmake_minimum_required(VERSION 3.22)
+
+# Set the C++14 standard
+set(CMAKE_CXX_STANDARD 14)
+
+# Project Name
+project(OperationSquirrel)
+
+# Specify desired name of executable
+set(MYEXEC secretSquirrel)
+
+# Specify location of includes, './inc' in this case
+set(MYINCLUDES inc 
+../../usr/include/glib-2.0/ 
+../../usr/include/gstreamer-1.0/ 
+../../usr/include/python3.6m/ 
+../../usr/lib/aarch64-linux-gnu/glib-2.0/include/ 
+../../usr/local/cuda-10.2/targets/aarch64-linux/include/ 
+../../usr/local/include/jetson-inference/ 
+../../usr/local/include/jetson-inference/docs/html/ 
+../../usr/local/include/jetson-utils/)
+
+# Specify location of src files, './src' in this case
+set(MYSRC src)
+
+# I../includes
+include_directories(${MYSRC} ${MYINCLUDES})
+
+# Put all .cpp files inside src into SOURCES variable
+file(GLOB SOURCES
+	${MYSRC}/*.cpp
+)
+
+# Compile the files defined by SOURCES to generate exec defined by EXEC
+add_executable(${MYEXEC} ${SOURCES})

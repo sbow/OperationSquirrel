@@ -1,0 +1,35 @@
+ers/jetson-inference$ sudo docker run -it --entrypoint sh 421cc47d8816
+[sudo] password for cameroncrose72: 
+# ls
+container
+# cd ..
+# ls
+app  boot  dst	home		  lib	 mnt  proc  run   srv  tmp  var
+bin  dev   etc	jetson-inference  media  opt  root  sbin  sys  usr
+# find -name "Python.h"
+./usr/include/python3.6m/Python.h
+# find -name "structmember.h"
+./usr/include/python3.6m/structmember.h
+# find -name "cuda_runtime.h"
+./usr/local/cuda-10.2/targets/aarch64-linux/include/cuda_runtime.h
+# find -name "imageFormat.inl"
+./usr/local/include/jetson-utils/imageFormat.inl
+./jetson-inference/build/aarch64/include/jetson-utils/imageFormat.inl
+./jetson-inference/utils/image/imageFormat.inl
+# find -name "gst.h"
+./usr/include/gstreamer-1.0/gst/gst.h
+# find -name "glib.h"
+./usr/include/glib-2.0/glib.h
+# find -name "glibconfig.h"
+./usr/lib/aarch64-linux-gnu/glib-2.0/include/glibconfig.h
+# find -name "detectNet.h"
+./usr/local/include/jetson-inference/detectNet.h
+./jetson-inference/build/aarch64/include/jetson-inference/detectNet.h
+./jetson-inference/c/detectNet.h
+# find -name "stb_image.h"
+./jetson-inference/utils/image/stb/stb_image.h
+# find -name "videoSource.h"
+./usr/local/include/jetson-utils/videoSource.h
+./jetson-inference/build/aarch64/include/jetson-utils/videoSource.h
+./jetson-inference/utils/video/videoSource.h
+

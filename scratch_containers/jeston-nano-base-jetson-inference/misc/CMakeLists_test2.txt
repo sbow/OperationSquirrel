@@ -1,0 +1,39 @@
+
+# require CMake 2.8 or greater
+cmake_minimum_required(VERSION 2.8)
+
+# declare my-recognition project
+project(OperationSquirrel)
+
+# Specify desired name of executable
+set(MYEXEC secretSquirrel)
+
+# import jetson-inference and jetson-utils packages.
+# note that if you didn't do "sudo make install"
+# while building jetson-inference, this will error.
+find_package(jetson-utils)
+find_package(jetson-inference)
+
+# CUDA is required
+find_package(CUDA)
+
+# add directory for libnvbuf-utils to program
+link_directories(/usr/lib/aarch64-linux-gnu/tegra)
+
+# specify includes directory, './inc' in this case
+set(MYINCLUDES inc)
+
+# Specify location of src files, './src' in this case
+set(MYSRC src)
+
+# I../includes
+include_directories(${MYSRC} ${MYINCLUDES})
+
+# Put all .cpp files inside src into SOURCES variable
+file(GLOB SOURCES ${MYSRC}/*.cpp)
+
+# compile the my-recognition program
+cuda_add_executable(${MYSRC} ${MYINCLUDES})
+
+# link my-recognition to jetson-inference library
+target_link_libraries(secretSquirrel jetson-inference)
