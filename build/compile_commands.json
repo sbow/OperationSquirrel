@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/shaun/git/OperationSquirrel/build",
+  "command": "/usr/bin/g++   -g -std=gnu++11 -o CMakeFiles/helloworld_cpp_cmake.dir/main.cpp.o -c /home/shaun/git/OperationSquirrel/shaunStuff/helloworld_cpp_cmake/main.cpp",
+  "file": "/home/shaun/git/OperationSquirrel/shaunStuff/helloworld_cpp_cmake/main.cpp"
+}
+]

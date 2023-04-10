@@ -1,0 +1,56 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "configure helloworld_cpp_cmake",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                "${workspaceFolder}/shaunStuff/helloworld_cpp_cmake",
+                "-B",
+                "${workspaceFolder}/shaunStuff/helloworld_cpp_cmake/build"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "build helloworld_cpp_cmake",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/shaunStuff/helloworld_cpp_cmake/build"
+            ],
+            "group": "build",
+            "dependsOn": "configure helloworld_cpp_cmake",
+            "problemMatcher": []
+        },
+        {
+            "label": "configure helloworld2_cpp_cmake",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-S",
+                "${workspaceFolder}/shaunStuff/helloworld2_cpp_cmake",
+                "-B",
+                "${workspaceFolder}/shaunStuff/helloworld2_cpp_cmake/build"
+            ],
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "build helloworld2_cpp_cmake",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "--build",
+                "${workspaceFolder}/shaunStuff/helloworld2_cpp_cmake/build"
+            ],
+            "group": "build",
+            "dependsOn": "configure helloworld2_cpp_cmake",
+            "problemMatcher": []
+        }
+
+    ]
+}
