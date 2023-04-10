@@ -1,3 +1,0 @@
-/home/shaun/git/OperationSquirrel/build/CMakeFiles/helloworld_cpp_cmake.dir
-/home/shaun/git/OperationSquirrel/build/CMakeFiles/edit_cache.dir
-/home/shaun/git/OperationSquirrel/build/CMakeFiles/rebuild_cache.dir
