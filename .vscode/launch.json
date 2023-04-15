@@ -1,0 +1,45 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug helloworld_cpp_cmake",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/shaunStuff/helloworld_cpp_cmake/build/helloworld_cpp_cmake",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/shaunStuff/helloworld_cpp_cmake",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build helloworld_cpp_cmake"
+        },
+        {
+            "name": "Debug helloworld2_cpp_cmake",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/shaunStuff/helloworld2_cpp_cmake/build/helloworld2_cpp_cmake",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/shaunStuff/helloworld2_cpp_cmake",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "preLaunchTask": "build helloworld2_cpp_cmake"
+        }
+    ]
+}

@@ -1,6 +1,6 @@
 
 # require CMake 2.8 or greater
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.9)
 
 # declare my-recognition project
 project(my-recognition)
@@ -19,6 +19,7 @@ link_directories(/usr/lib/aarch64-linux-gnu/tegra)
 
 # compile the my-recognition program
 cuda_add_executable(my-recognition detectnet.cpp)
+#cuda_add_executable(my-recognition my-recognition.cpp)
 
 # link my-recognition to jetson-inference library
 target_link_libraries(my-recognition jetson-inference)

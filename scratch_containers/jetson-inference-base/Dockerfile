@@ -14,6 +14,9 @@ RUN set -ex;                                                \
     xserver-xorg-video-dummy \
     x11-xserver-utils \
     x11-apps \
+    g++ \
+    cmake \
+    make \
     mesa-utils;
 
 # Set the working directory inside the container
@@ -23,9 +26,10 @@ WORKDIR /app
 COPY ./container_src container
 
 # Build the application with cmake inside the container
-RUN set -ex;                                                \
-    cd /app/container/build;                                \
-    cmake ..;                                               \
+RUN set -ex;  \                                             
+    mkdir -p /app/container/build;\
+    cd /app/container/build;      \                         
+    cmake ..;                     \                          
     make;
 
 # Set environment variable for X11 forwarding

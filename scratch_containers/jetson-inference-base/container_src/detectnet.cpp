@@ -46,7 +46,8 @@ int main()
     }
 
     // Create detection network
-    detectNet* net = detectNet::Create(detectNet::NetworkType::SSD_MOBILENET_V2);
+    // Shaun edit detectNet* net = detectNet::Create(detectNet::NetworkType::SSD_MOBILENET_V2);
+    detectNet* net = detectNet::Create();
 
     if (!net)
     {
