@@ -2,26 +2,31 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "configure simple_camera",
+            "type": "shell",
+            "command": "mkdir -p ${workspaceFolder}/shaunStuff/simple_camera/build && cd ${workspaceFolder}/shaunStuff/simple_camera/build && cmake .. -G\"Unix Makefiles\"",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "build simple_camera",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/shaunStuff/simple_camera/build && cmake --build .",
+            "group": "build",
+            "dependsOn": "configure simple_camera",
+            "problemMatcher": []
+        },
+        {
             "label": "configure helloworld_cpp_cmake",
             "type": "shell",
-            "command": "cmake",
-            "args": [
-                "-S",
-                "${workspaceFolder}/shaunStuff/helloworld_cpp_cmake",
-                "-B",
-                "${workspaceFolder}/shaunStuff/helloworld_cpp_cmake/build"
-            ],
+            "command": "mkdir -p ${workspaceFolder}/shaunStuff/helloworld_cpp_cmake/build && cd ${workspaceFolder}/shaunStuff/helloworld_cpp_cmake/build && cmake .. -G\"Unix Makefiles\"",
             "group": "build",
             "problemMatcher": []
         },
         {
             "label": "build helloworld_cpp_cmake",
             "type": "shell",
-            "command": "cmake",
-            "args": [
-                "--build",
-                "${workspaceFolder}/shaunStuff/helloworld_cpp_cmake/build"
-            ],
+            "command": "cd ${workspaceFolder}/shaunStuff/helloworld_cpp_cmake/build && cmake --build .",
             "group": "build",
             "dependsOn": "configure helloworld_cpp_cmake",
             "problemMatcher": []

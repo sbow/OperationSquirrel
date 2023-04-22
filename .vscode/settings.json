@@ -1,3 +1,7 @@
 {
-    "cmake.sourceDirectory": "${workspaceFolder}/shaunStuff/helloworld_cpp_cmake"
+    "cmake.sourceDirectory": [
+        "${workspaceFolder}/shaunStuff/helloworld_cpp_cmake",
+        "${workspaceFolder}/shaunStuff/helloworld2_cpp_cmake",
+        "${workspaceFolder}/shaunStuff/simple_camera"
+    ]
 }
