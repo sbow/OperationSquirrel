@@ -87,9 +87,327 @@ void print_raw_imu(mavlink_raw_imu_t raw_imu) {
 
 void print_command_ack(mavlink_command_ack_t command_ack) {
     printf("Command ACK received:\n");
-    printf("\tCommand: %u\n", command_ack.command);
-    printf("\tResult: %u\n", command_ack.result);
+    printf("\tCommand: ");
+    switch (command_ack.command)
+    {
+        case MAV_CMD_NAV_WAYPOINT:
+            printf("MAV_CMD_NAV_WAYPOINT\n");
+            break;
+        case MAV_CMD_NAV_LOITER_UNLIM:
+            printf("MAV_CMD_NAV_LOITER_UNLIM\n");
+            break;
+        case MAV_CMD_NAV_LOITER_TURNS:
+            printf("MAV_CMD_NAV_LOITER_TURNS\n");
+            break;
+        case MAV_CMD_NAV_LOITER_TIME:
+            printf("MAV_CMD_NAV_LOITER_TIME\n");
+            break;
+        case MAV_CMD_NAV_RETURN_TO_LAUNCH:
+            printf("MAV_CMD_NAV_RETURN_TO_LAUNCH\n");
+            break;
+        case MAV_CMD_NAV_LAND:
+            printf("MAV_CMD_NAV_LAND\n");
+            break;
+        case MAV_CMD_NAV_TAKEOFF:
+            printf("MAV_CMD_NAV_TAKEOFF\n");
+            break;
+        case MAV_CMD_NAV_LAND_LOCAL:
+            printf("MAV_CMD_NAV_LAND_LOCAL\n");
+            break;
+        case MAV_CMD_NAV_TAKEOFF_LOCAL:
+            printf("MAV_CMD_NAV_TAKEOFF_LOCAL\n");
+            break;
+        case MAV_CMD_NAV_FOLLOW:
+            printf("MAV_CMD_NAV_FOLLOW\n");
+            break;
+        case MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT:
+            printf("MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT\n");
+            break;
+        case MAV_CMD_NAV_LOITER_TO_ALT:
+            printf("MAV_CMD_NAV_LOITER_TO_ALT\n");
+            break;
+        case MAV_CMD_DO_FOLLOW:
+            printf("MAV_CMD_DO_FOLLOW\n");
+            break;
+        case MAV_CMD_DO_FOLLOW_REPOSITION:
+            printf("MAV_CMD_DO_FOLLOW_REPOSITION\n");
+            break;
+        case MAV_CMD_DO_ORBIT:
+            printf("MAV_CMD_DO_ORBIT\n");
+            break;
+        case MAV_CMD_NAV_ROI:
+            printf("MAV_CMD_NAV_ROI\n");
+            break;
+        case MAV_CMD_NAV_PATHPLANNING:
+            printf("MAV_CMD_NAV_PATHPLANNING\n");
+            break;
+        case MAV_CMD_NAV_SPLINE_WAYPOINT:
+            printf("MAV_CMD_NAV_SPLINE_WAYPOINT\n");
+            break;
+        case MAV_CMD_NAV_VTOL_TAKEOFF:
+            printf("MAV_CMD_NAV_VTOL_TAKEOFF\n");
+            break;
+        case MAV_CMD_NAV_VTOL_LAND:
+            printf("MAV_CMD_NAV_VTOL_LAND\n");
+            break;
+        case MAV_CMD_NAV_GUIDED_ENABLE:
+            printf("MAV_CMD_NAV_GUIDED_ENABLE\n");
+            break;
+        case MAV_CMD_NAV_DELAY:
+            printf("MAV_CMD_NAV_DELAY\n");
+            break;
+        case MAV_CMD_NAV_PAYLOAD_PLACE:
+            printf("MAV_CMD_NAV_PAYLOAD_PLACE\n");
+            break;
+        case MAV_CMD_NAV_LAST:
+            printf("MAV_CMD_NAV_LAST\n");
+            break;
+        case MAV_CMD_CONDITION_DELAY:
+            printf("MAV_CMD_CONDITION_DELAY\n");
+            break;
+        case MAV_CMD_CONDITION_CHANGE_ALT:
+            printf("MAV_CMD_CONDITION_CHANGE_ALT\n");
+            break;
+        case MAV_CMD_CONDITION_DISTANCE:
+            printf("MAV_CMD_CONDITION_DISTANCE\n");
+            break;
+        case MAV_CMD_CONDITION_YAW:
+            printf("MAV_CMD_CONDITION_YAW\n");
+            break;
+        case MAV_CMD_CONDITION_LAST:
+            printf("MAV_CMD_CONDITION_LAST\n");
+            break;
+        case MAV_CMD_DO_SET_MODE:
+            printf("MAV_CMD_DO_SET_MODE\n");
+            break;
+        case MAV_CMD_DO_JUMP:
+            printf("MAV_CMD_DO_JUMP\n");
+            break;
+        case MAV_CMD_DO_CHANGE_SPEED:
+            printf("MAV_CMD_DO_CHANGE_SPEED\n");
+            break;
+        case MAV_CMD_DO_SET_HOME:
+            printf("MAV_CMD_DO_SET_HOME\n");
+            break;
+        case MAV_CMD_DO_SET_PARAMETER:
+            printf("MAV_CMD_DO_SET_PARAMETER\n");
+            break;
+        case MAV_CMD_DO_SET_RELAY:
+            printf("MAV_CMD_DO_SET_RELAY\n");
+            break;
+        case MAV_CMD_DO_REPEAT_RELAY:
+            printf("MAV_CMD_DO_REPEAT_RELAY\n");
+            break;
+        case MAV_CMD_DO_SET_SERVO:
+            printf("MAV_CMD_DO_SET_SERVO\n");
+            break;
+        case MAV_CMD_DO_REPEAT_SERVO:
+            printf("MAV_CMD_DO_REPEAT_SERVO\n");
+            break;
+        case MAV_CMD_DO_FLIGHTTERMINATION:
+            printf("MAV_CMD_DO_FLIGHTTERMINATION\n");
+            break;
+        case MAV_CMD_DO_CHANGE_ALTITUDE:
+            printf("MAV_CMD_DO_CHANGE_ALTITUDE\n");
+            break;
+        case MAV_CMD_DO_SET_ACTUATOR:
+            printf("MAV_CMD_DO_SET_ACTUATOR\n");
+            break;
+        case MAV_CMD_DO_LAND_START:
+            printf("MAV_CMD_DO_LAND_START\n");
+            break;
+        case MAV_CMD_DO_RALLY_LAND:
+            printf("MAV_CMD_DO_RALLY_LAND\n");
+            break;
+        case MAV_CMD_DO_GO_AROUND:
+            printf("MAV_CMD_DO_GO_AROUND\n");
+            break;
+        case MAV_CMD_DO_REPOSITION:
+            printf("MAV_CMD_DO_REPOSITION\n");
+            break;
+        case MAV_CMD_DO_PAUSE_CONTINUE:
+            printf("MAV_CMD_DO_PAUSE_CONTINUE\n");
+            break;
+        case MAV_CMD_DO_SET_REVERSE:
+            printf("MAV_CMD_DO_SET_REVERSE\n");
+            break;
+        case MAV_CMD_DO_SET_ROI_LOCATION:
+            printf("MAV_CMD_DO_SET_ROI_LOCATION\n");
+            break;
+        case MAV_CMD_DO_SET_ROI_WPNEXT_OFFSET:
+            printf("MAV_CMD_DO_SET_ROI_WPNEXT_OFFSET\n");
+            break;
+        case MAV_CMD_DO_SET_ROI_NONE:
+            printf("MAV_CMD_DO_SET_ROI_NONE\n");
+            break;
+        case MAV_CMD_DO_SET_ROI_SYSID:
+            printf("MAV_CMD_DO_SET_ROI_SYSID\n");
+            break;
+        case MAV_CMD_DO_CONTROL_VIDEO:
+            printf("MAV_CMD_DO_CONTROL_VIDEO\n");
+            break;
+        case MAV_CMD_DO_SET_ROI:
+            printf("MAV_CMD_DO_SET_ROI\n");
+            break;
+        case MAV_CMD_DO_DIGICAM_CONFIGURE:
+            printf("MAV_CMD_DO_DIGICAM_CONFIGURE\n");
+            break;
+        case MAV_CMD_DO_DIGICAM_CONTROL:
+            printf("MAV_CMD_DO_DIGICAM_CONTROL\n");
+            break;
+        case MAV_CMD_DO_MOUNT_CONFIGURE:
+            printf("MAV_CMD_DO_MOUNT_CONFIGURE\n");
+            break;
+        case MAV_CMD_DO_MOUNT_CONTROL:
+            printf("MAV_CMD_DO_MOUNT_CONTROL\n");
+            break;
+        case MAV_CMD_DO_SET_CAM_TRIGG_DIST:
+            printf("MAV_CMD_DO_SET_CAM_TRIGG_DIST\n");
+            break;
+        case MAV_CMD_DO_FENCE_ENABLE:
+            printf("MAV_CMD_DO_FENCE_ENABLE\n");
+            break;
+        case MAV_CMD_DO_PARACHUTE:
+            printf("MAV_CMD_DO_PARACHUTE\n");
+            break;
+        case MAV_CMD_DO_MOTOR_TEST:
+            printf("MAV_CMD_DO_MOTOR_TEST\n");
+            break;
+        case MAV_CMD_DO_INVERTED_FLIGHT:
+            printf("MAV_CMD_DO_INVERTED_FLIGHT\n");
+            break;
+        case MAV_CMD_DO_GRIPPER:
+            printf("MAV_CMD_DO_GRIPPER\n");
+            break;
+        case MAV_CMD_DO_AUTOTUNE_ENABLE:
+            printf("MAV_CMD_DO_AUTOTUNE_ENABLE\n");
+            break;
+        case MAV_CMD_NAV_SET_YAW_SPEED:
+            printf("MAV_CMD_NAV_SET_YAW_SPEED\n");
+            break;
+        case MAV_CMD_DO_SET_CAM_TRIGG_INTERVAL:
+            printf("MAV_CMD_DO_SET_CAM_TRIGG_INTERVAL\n");
+            break;
+        case MAV_CMD_DO_MOUNT_CONTROL_QUAT:
+            printf("MAV_CMD_DO_MOUNT_CONTROL_QUAT\n");
+            break;
+        case MAV_CMD_DO_GUIDED_MASTER:
+            printf("MAV_CMD_DO_GUIDED_MASTER\n");
+            break;
+        case MAV_CMD_DO_GUIDED_LIMITS:
+            printf("MAV_CMD_DO_GUIDED_LIMITS\n");
+            break;
+        case MAV_CMD_DO_ENGINE_CONTROL:
+            printf("MAV_CMD_DO_ENGINE_CONTROL\n");
+            break;
+        case MAV_CMD_DO_SET_MISSION_CURRENT:
+            printf("MAV_CMD_DO_SET_MISSION_CURRENT\n");
+            break;
+        case MAV_CMD_DO_LAST:
+            printf("MAV_CMD_DO_LAST\n");
+            break;
+        case MAV_CMD_PREFLIGHT_CALIBRATION:
+            printf("MAV_CMD_PREFLIGHT_CALIBRATION\n");
+            break;
+        case MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS:
+            printf("MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS\n");
+            break;
+        case MAV_CMD_PREFLIGHT_UAVCAN:
+            printf("MAV_CMD_PREFLIGHT_UAVCAN\n");
+            break;
+        case MAV_CMD_PREFLIGHT_STORAGE:
+            printf("MAV_CMD_PREFLIGHT_STORAGE\n");
+            break;
+        case MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN:
+            printf("MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN\n");
+            break;
+        case MAV_CMD_OVERRIDE_GOTO:
+            printf("MAV_CMD_OVERRIDE_GOTO\n");
+            break;
+        case MAV_CMD_OBLIQUE_SURVEY:
+            printf("MAV_CMD_OBLIQUE_SURVEY\n");
+            break;
+        case MAV_CMD_MISSION_START:
+            printf("MAV_CMD_MISSION_START\n");
+            break;
+        case MAV_CMD_ACTUATOR_TEST:
+            printf("MAV_CMD_ACTUATOR_TEST\n");
+            break;
+        case MAV_CMD_CONFIGURE_ACTUATOR:
+            printf("MAV_CMD_CONFIGURE_ACTUATOR\n");
+            break;
+        case MAV_CMD_COMPONENT_ARM_DISARM:
+            printf("MAV_CMD_COMPONENT_ARM_DISARM\n");
+            break;
+        case MAV_CMD_RUN_PREARM_CHECKS:
+            printf("MAV_CMD_RUN_PREARM_CHECKS\n");
+            break;
+        case MAV_CMD_ILLUMINATOR_ON_OFF:
+            printf("MAV_CMD_ILLUMINATOR_ON_OFF\n");
+            break;
+        case MAV_CMD_GET_HOME_POSITION:
+            printf("MAV_CMD_GET_HOME_POSITION\n");
+            break;
+        case MAV_CMD_INJECT_FAILURE:
+            printf("MAV_CMD_INJECT_FAILURE\n");
+            break;
+        case MAV_CMD_START_RX_PAIR:
+            printf("MAV_CMD_START_RX_PAIR\n");
+            break;
+        case MAV_CMD_GET_MESSAGE_INTERVAL:
+            printf("MAV_CMD_GET_MESSAGE_INTERVAL\n");
+            break;
+        case MAV_CMD_SET_MESSAGE_INTERVAL:
+            printf("MAV_CMD_SET_MESSAGE_INTERVAL\n");
+            break;
+        case MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES:
+            printf("MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES\n");
+            break;
+        case MAV_CMD_SET_CAMERA_MODE:
+            printf("MAV_CMD_SET_CAMERA_MODE\n");
+            break;
+        default:
+            printf("Unknown command\n");
+            break;
+    }
+    printf("\tResult: ");
+    switch (command_ack.result)
+    {
+        case 0:
+            printf("MAV_RESULT_ACCEPTED\n");
+            break;
+        case 1:
+            printf("MAV_RESULT_TEMPORARILY_REJECTED\n");
+            break;
+        case 2:
+            printf("MAV_RESULT_DENIED\n");
+            break;
+        case 3:
+            printf("MAV_RESULT_UNSUPPORTED\n");
+            break;
+        case 4:
+            printf("MAV_RESULT_FAILED\n");
+            break;
+        case 5:
+            printf("MAV_RESULT_IN_PROGRESS\n");
+            break;
+        case 6:
+            printf("MAV_RESULT_CANCELLED\n");
+            break;
+        case 7:
+            printf("MAV_RESULT_COMMAND_LONG_ONLY\n");
+            break;
+        case 8:
+            printf("MAV_RESULT_COMMAND_INT_ONLY\n");
+            break;
+        case 9:
+            printf("MAV_RESULT_COMMAND_COMMAND_UNSUPPORTED_MAV_FRAME\n");
+            break;
+        default:
+            printf("We don't know\n");
+    }
 }
+    
 
 void print_param_request_read(const mavlink_param_request_read_t& param_request_read) {
     printf("Param Request Read:\n");
@@ -105,6 +423,38 @@ void print_request_data_stream(const mavlink_request_data_stream_t& request_data
     printf("\tStream ID: %u\n", request_data_stream.req_stream_id);
     printf("\tMessage Rate: %u\n", request_data_stream.req_message_rate);
     printf("\tStart/Stop: %u\n", request_data_stream.start_stop);
+}
+
+void print_gps_global_origin(const mavlink_gps_global_origin_t& gps_global_origin) 
+{
+    printf("GPS_GLOBAL_ORIGIN message:\n");
+    printf("\tLatitude: %f\n", (double)gps_global_origin.latitude);
+    printf("\tLongitude: %f\n", (double)gps_global_origin.longitude);
+    printf("\tAltitude: %f\n", (double)gps_global_origin.altitude);
+}
+
+void print_home_position(const mavlink_home_position_t& home_position) 
+{
+    printf("HOME_POSITION message:\n");
+    printf("\tLatitude: %f\n", (double)home_position.latitude);
+    printf("\tLongitude: %f\n", (double)home_position.longitude);
+    printf("\tAltitude: %f\n", (double)home_position.altitude);
+}
+
+void print_statustext(const mavlink_statustext_t& statustext) 
+{
+    printf("STATUSTEXT message:\n");
+    printf("\tSeverity: %u\n", statustext.severity);
+    printf("\tText: %s\n", statustext.text);
+}
+
+// Function to print PARAM_VALUE message
+void printParamValueMessage(const mavlink_param_value_t& paramValue) {
+    printf("Parameter Name: %s\n", paramValue.param_id);
+    printf("\tParameter Value: %.4f\n", paramValue.param_value);
+    printf("\tParameter Type: %d\n", paramValue.param_type);
+    printf("\tParameter Count: %d\n", paramValue.param_count);
+    printf("\tParameter Index: %d\n", paramValue.param_index);
 }
 
 int main() {
@@ -135,6 +485,8 @@ int main() {
     // define system and component ID for companion computer
     uint8_t SENDER_SYS_ID = 0;
     uint8_t SENDER_COMP_ID = 0;
+    uint8_t TARGET_SYS_ID = 1;
+    uint8_t TARGET_COMP_ID = 1;
 	
     // Subscribe to HEARTBEAT message
     mavlink_msg_heartbeat_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, MAV_TYPE_ONBOARD_CONTROLLER, MAV_AUTOPILOT_INVALID, 0, 0, MAV_STATE_STANDBY);
@@ -155,17 +507,39 @@ int main() {
     mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 1, 1, MAV_CMD_REQUEST_MESSAGE, 0, MAVLINK_MSG_ID_RAW_IMU, 0, 0, 0, 0, 0, 0);
 
     len = len + mavlink_msg_to_send_buffer(&buffer[len], &msg);
-    
+
     // Set the flight mode
-	mavlink_msg_command_long_pack(0, MAV_COMP_ID_ALL, &msg, 0, 0, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_GUIDED_ARMED, 0, 0, 0, 0, 0, 0);
+	mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 1, 1, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 4, 0, 0, 0, 0, 0);
     
     len = len + mavlink_msg_to_send_buffer(&buffer[len], &msg);
     
     // Command to ARM the drone
-	mavlink_msg_command_long_pack(0, MAV_COMP_ID_ALL, &msg, 0, 0, MAV_CMD_COMPONENT_ARM_DISARM, 0, 1, 1, 0, 0, 0, 0, 0);
+	mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 1, 1, MAV_CMD_COMPONENT_ARM_DISARM, 0, 1, 1, 0, 0, 0, 0, 0);
 	
     len = len + mavlink_msg_to_send_buffer(&buffer[len], &msg);
+
+    // Command to takeoff
+    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_NAV_TAKEOFF, 0, 0, 0, 0, 0, 0, 0, 15.0);
     
+    len = len + mavlink_msg_to_send_buffer(&buffer[len], &msg);
+
+    // Delay the next command for specified time
+    //mavlink_msg_command_int_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, 5, MAV_CMD_NAV_DELAY, 0, 0, 10, 0, 0, 0, 0, 0, 0);
+    
+    //len = len + mavlink_msg_to_send_buffer(&buffer[len], &msg);
+    
+    // Command to set target position for the drone to fly to
+    double latitude = -35.3617;  // Target latitude
+    double longitude = 149.1649;  // Target longitude
+    float altitude = 15.0;  // Target altitude in meters
+
+    //mavlink_msg_set_position_target_global_int_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 0, MAV_FRAME_GLOBAL_RELATIVE_ALT_INT, 0b0000111111111000, 0, 0, 0, latitude * 1e7, longitude * 1e7, altitude * 1e3, 0, 0, 0, 0, 0, 0, 0);
+    
+
+    // Send drone to waypoint
+    //mavlink_msg_command_int_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, 5, MAV_CMD_DO_REPOSITION, 0, 0, 5, 0, 0, 0, (int)(latitude * 1e7), (int)(longitude * 1e7), 25);
+
+    //len = len + mavlink_msg_to_send_buffer(&buffer[len], &msg);
 
     // Send message to flight controller
     ssize_t n = write(serial_port, buffer, len);
@@ -195,7 +569,7 @@ int main() {
                 case MAVLINK_MSG_ID_HEARTBEAT:
 		    		mavlink_heartbeat_t heartbeat;
                     mavlink_msg_heartbeat_decode(&msg, &heartbeat);
-                    print_heartbeat(heartbeat);
+                    //print_heartbeat(heartbeat);
                     break;
                 case MAVLINK_MSG_ID_GPS_RAW_INT:
 		    		mavlink_gps_raw_int_t msg_gps_raw_int;
@@ -210,7 +584,7 @@ int main() {
 				case MAVLINK_MSG_ID_RAW_IMU:
 					mavlink_raw_imu_t msg_raw_imu;
 					mavlink_msg_raw_imu_decode(&msg, &msg_raw_imu);
-					print_raw_imu(msg_raw_imu);
+					//print_raw_imu(msg_raw_imu);
 					break;
 				case MAVLINK_MSG_ID_GLOBAL_POSITION_INT:
 					mavlink_global_position_int_t global_pos_int;
@@ -232,8 +606,31 @@ int main() {
                     mavlink_msg_request_data_stream_decode(&msg, &request_data_stream);
                     print_request_data_stream(request_data_stream);
                     break;
-	        default:
-		    	std::cout << "Received message with ID " << (int)msg.msgid << std::endl;
+                case MAVLINK_MSG_ID_GPS_GLOBAL_ORIGIN:
+                    mavlink_gps_global_origin_t gps_global_origin;
+                    mavlink_msg_gps_global_origin_decode(&msg, &gps_global_origin);
+                    // Print the GPS_GLOBAL_ORIGIN message
+                    // Extract and print relevant fields
+                    break;
+                case MAVLINK_MSG_ID_HOME_POSITION:
+                    mavlink_home_position_t home_position;
+                    mavlink_msg_home_position_decode(&msg, &home_position);
+                    // Print the HOME_POSITION message
+                    // Extract and print relevant fields
+                    break;
+                case MAVLINK_MSG_ID_STATUSTEXT:
+                    mavlink_statustext_t statustext;
+                    mavlink_msg_statustext_decode(&msg, &statustext);
+                    // Print the STATUSTEXT message
+                    // Extract and print relevant fields
+                    break;
+                case MAVLINK_MSG_ID_PARAM_VALUE:
+                    mavlink_param_value_t paramValue;
+                    mavlink_msg_param_value_decode(&msg, &paramValue);
+                    printParamValueMessage(paramValue);
+                    break;
+                default:
+                    std::cout << "Received message with ID " << (int)msg.msgid << std::endl;
             }
         }
     }
