@@ -1,21 +1,24 @@
 CC = g++
-CFLAGS = -I../../libraries/mavlink/generated/include/mavlink/v2.0/common
+CFLAGS = -I./inc/mavlink/v2.0/common
 
-# list of object files
-OBJ = mavlink2_example.o
+# get list of all .cpp files in the source directory
+SRCS := $(wildcard *.cpp)
+
+# generate list of object files
+OBJ := $(SRCS:.cpp=.o)
 
 # default target
-all: mavlink2_example
+all: main
 
 # compile source code into object files
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # link object files into executable
-mavlink2_example: $(OBJ)
+main: $(OBJ)
 	$(CC) $(OBJ) -o $@
 
 # clean up object and executable files
 clean:
-	rm -f $(OBJ) mavlink2_example
+	rm -f $(OBJ) main
 
