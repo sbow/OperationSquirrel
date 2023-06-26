@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  operationsquirrel:
-    image: operationsquirrel
-    build:
-      context: .
-      dockerfile: ./Dockerfile
