@@ -30,6 +30,7 @@ void print_sys_status(mavlink_sys_status_t &sys_status)
     printf("\tErrors count 4: %u\n", sys_status.errors_count4);
 }
 
+/*
 void print_gps_raw_int(mavlink_gps_raw_int_t &gps_raw_int) 
 {
     printf("GPS raw data:\n");
@@ -41,6 +42,21 @@ void print_gps_raw_int(mavlink_gps_raw_int_t &gps_raw_int)
     printf("\tGround speed: %d m/s\n", gps_raw_int.vel);
     printf("\tCourse over ground: %d degrees\n", gps_raw_int.cog);
 }
+*/
+
+/*
+void print_attitude(mavlink_attitude_t& attitude) 
+{
+    printf("Attitude:\n");
+    printf("\tTimestamp: %u\n", attitude.time_boot_ms);
+    printf("\tRoll: %f (radians)\n", attitude.roll);
+    printf("\tPitch: %f (radians)\n", attitude.pitch);
+    printf("\tYaw: %f (radians)\n", attitude.yaw);
+    printf("\tRoll rate: %f (radians/second)\n", attitude.rollspeed);
+    printf("\tPitch rate: %f (radians/second)\n", attitude.pitchspeed);
+    printf("\tYaw rate: %f (radians/second)\n", attitude.yawspeed);
+}
+*/
 
 void print_attitude(mavlink_attitude_t &attitude) 
 {
@@ -74,6 +90,138 @@ void print_raw_imu(mavlink_raw_imu_t &raw_imu)
     printf("\tX magnetometer: %d\n", raw_imu.xmag);
     printf("\tY magnetometer: %d\n", raw_imu.ymag);
     printf("\tZ magnetometer: %d\n", raw_imu.zmag);
+}
+
+void print_scaled_imu(mavlink_scaled_imu_t& scaled_imu) 
+{
+    printf("Scaled IMU:\n");
+    printf("\tTimestamp: %u\n", scaled_imu.time_boot_ms);
+    printf("\tAcceleration (m/s^2):\n");
+    printf("\t\tX: %d\n", scaled_imu.xacc);
+    printf("\t\tY: %d\n", scaled_imu.yacc);
+    printf("\t\tZ: %d\n", scaled_imu.zacc);
+    printf("\tAngular velocity (rad/s):\n");
+    printf("\t\tX: %d\n", scaled_imu.xgyro);
+    printf("\t\tY: %d\n", scaled_imu.ygyro);
+    printf("\t\tZ: %d\n", scaled_imu.zgyro);
+    printf("\tMagnetic field (Gauss):\n");
+    printf("\t\tX: %d\n", scaled_imu.xmag);
+    printf("\t\tY: %d\n", scaled_imu.ymag);
+    printf("\t\tZ: %d\n", scaled_imu.zmag);
+    printf("\tTemperature (°C): %d\n", scaled_imu.temperature);
+}
+
+void print_servo_output_raw(mavlink_servo_output_raw_t& servo_output_raw) 
+{
+    printf("Servo Output Raw:\n");
+    printf("\tTimestamp: %u\n", servo_output_raw.time_usec);
+    printf("\tServo Output:\n");
+    printf("\t\tChannel 1: %d\n", servo_output_raw.servo1_raw);
+    printf("\t\tChannel 2: %d\n", servo_output_raw.servo2_raw);
+    printf("\t\tChannel 3: %d\n", servo_output_raw.servo3_raw);
+    printf("\t\tChannel 4: %d\n", servo_output_raw.servo4_raw);
+}
+
+void print_rc_channels_scaled(mavlink_rc_channels_scaled_t& rc_channels_scaled) 
+{
+    printf("RC Channels Scaled:\n");
+    printf("\tTimestamp: %u\n", rc_channels_scaled.time_boot_ms);
+    printf("\tScaled Channels:\n");
+    printf("\t\tChannel 1: %d\n", rc_channels_scaled.chan1_scaled);
+    printf("\t\tChannel 2: %d\n", rc_channels_scaled.chan2_scaled);
+    printf("\t\tChannel 3: %d\n", rc_channels_scaled.chan3_scaled);
+    printf("\t\tChannel 4: %d\n", rc_channels_scaled.chan4_scaled);
+    // Add more channels as needed
+}
+
+void print_local_position(mavlink_local_position_ned_t& local_position) 
+{
+    printf("Local Position:\n");
+    printf("\tTimestamp: %u\n", local_position.time_boot_ms);
+    printf("\tPosition (meters):\n");
+    printf("\t\tX: %f\n", local_position.x);
+    printf("\t\tY: %f\n", local_position.y);
+    printf("\t\tZ: %f\n", local_position.z);
+    printf("\tVelocity (m/s):\n");
+    printf("\t\tVX: %f\n", local_position.vx);
+    printf("\t\tVY: %f\n", local_position.vy);
+    printf("\t\tVZ: %f\n", local_position.vz);
+}
+
+void print_rc_channels_raw(mavlink_rc_channels_raw_t& rc_channels_raw) 
+{
+    printf("RC Channels Raw:\n");
+    printf("\tTimestamp: %u\n", rc_channels_raw.time_boot_ms);
+    printf("\tRaw Channels:\n");
+    printf("\t\tChannel 1: %d\n", rc_channels_raw.chan1_raw);
+    printf("\t\tChannel 2: %d\n", rc_channels_raw.chan2_raw);
+    printf("\t\tChannel 3: %d\n", rc_channels_raw.chan3_raw);
+    printf("\t\tChannel 4: %d\n", rc_channels_raw.chan4_raw);
+    // Add more channels as needed
+}
+
+void print_gps_raw_int(mavlink_gps_raw_int_t &gps_raw_int) 
+{
+    printf("GPS Raw Int:\n");
+    printf("\tTimestamp: %lu ms\n", gps_raw_int.time_usec);
+    printf("\tFix type: %d\n", gps_raw_int.fix_type);
+    printf("\tLatitude: %d\n", gps_raw_int.lat);
+    printf("\tLongitude: %d\n", gps_raw_int.lon);
+    printf("\tAltitude: %d\n", gps_raw_int.alt);
+    printf("\tSpeed: %d\n", gps_raw_int.vel);
+    printf("\tCourse: %d\n", gps_raw_int.cog);
+    printf("\tSatellites visible: %d\n", gps_raw_int.satellites_visible);
+} 
+
+void print_param_request_read(mavlink_param_request_read_t &param_request_read) 
+{
+    printf("Param Request Read:\n");
+    printf("\tTarget System: %u\n", param_request_read.target_system);
+    printf("\tTarget Component: %u\n", param_request_read.target_component);
+    printf("\tParameter ID: %s\n", param_request_read.param_id);
+}
+
+void print_request_data_stream(mavlink_request_data_stream_t &request_data_stream) 
+{
+    printf("REQUEST_DATA_STREAM message:\n");
+    printf("\tTarget System: %u\n", request_data_stream.target_system);
+    printf("\tTarget Component: %u\n", request_data_stream.target_component);
+    printf("\tStream ID: %u\n", request_data_stream.req_stream_id);
+    printf("\tMessage Rate: %u\n", request_data_stream.req_message_rate);
+    printf("\tStart/Stop: %u\n", request_data_stream.start_stop);
+}
+
+void print_gps_global_origin(mavlink_gps_global_origin_t &gps_global_origin) 
+{
+    printf("GPS_GLOBAL_ORIGIN message:\n");
+    printf("\tLatitude: %f\n", (double)gps_global_origin.latitude);
+    printf("\tLongitude: %f\n", (double)gps_global_origin.longitude);
+    printf("\tAltitude: %f\n", (double)gps_global_origin.altitude);
+}
+
+void print_home_position(mavlink_home_position_t &home_position) 
+{
+    printf("HOME_POSITION message:\n");
+    printf("\tLatitude: %f\n", (double)home_position.latitude);
+    printf("\tLongitude: %f\n", (double)home_position.longitude);
+    printf("\tAltitude: %f\n", (double)home_position.altitude);
+}
+
+void print_statustext(mavlink_statustext_t &statustext) 
+{
+    printf("STATUSTEXT message:\n");
+    printf("\tSeverity: %u\n", statustext.severity);
+    printf("\tText: %s\n", statustext.text);
+}
+
+// Function to print PARAM_VALUE message
+void print_param_value(mavlink_param_value_t &param_value) 
+{
+    printf("Parameter Name: %s\n", param_value.param_id);
+    printf("\tValue: %.4f\n", param_value.param_value);
+    printf("\tType: %d\n", param_value.param_type);
+    printf("\tCount: %d\n", param_value.param_count);
+    printf("\tIndex: %d\n", param_value.param_index);
 }
 
 void print_command_ack(mavlink_command_ack_t &command_ack) 
@@ -404,56 +552,4 @@ void print_command_ack(mavlink_command_ack_t &command_ack)
         default:
             printf("Unkown result\n");
     }
-}
-    
-
-void print_param_request_read(mavlink_param_request_read_t &param_request_read) 
-{
-    printf("Param Request Read:\n");
-    printf("\tTarget System: %u\n", param_request_read.target_system);
-    printf("\tTarget Component: %u\n", param_request_read.target_component);
-    printf("\tParameter ID: %s\n", param_request_read.param_id);
-}
-
-void print_request_data_stream(mavlink_request_data_stream_t &request_data_stream) 
-{
-    printf("REQUEST_DATA_STREAM message:\n");
-    printf("\tTarget System: %u\n", request_data_stream.target_system);
-    printf("\tTarget Component: %u\n", request_data_stream.target_component);
-    printf("\tStream ID: %u\n", request_data_stream.req_stream_id);
-    printf("\tMessage Rate: %u\n", request_data_stream.req_message_rate);
-    printf("\tStart/Stop: %u\n", request_data_stream.start_stop);
-}
-
-void print_gps_global_origin(mavlink_gps_global_origin_t &gps_global_origin) 
-{
-    printf("GPS_GLOBAL_ORIGIN message:\n");
-    printf("\tLatitude: %f\n", (double)gps_global_origin.latitude);
-    printf("\tLongitude: %f\n", (double)gps_global_origin.longitude);
-    printf("\tAltitude: %f\n", (double)gps_global_origin.altitude);
-}
-
-void print_home_position(mavlink_home_position_t &home_position) 
-{
-    printf("HOME_POSITION message:\n");
-    printf("\tLatitude: %f\n", (double)home_position.latitude);
-    printf("\tLongitude: %f\n", (double)home_position.longitude);
-    printf("\tAltitude: %f\n", (double)home_position.altitude);
-}
-
-void print_statustext(mavlink_statustext_t &statustext) 
-{
-    printf("STATUSTEXT message:\n");
-    printf("\tSeverity: %u\n", statustext.severity);
-    printf("\tText: %s\n", statustext.text);
-}
-
-// Function to print PARAM_VALUE message
-void print_param_value(mavlink_param_value_t &param_value) 
-{
-    printf("Parameter Name: %s\n", param_value.param_id);
-    printf("\tValue: %.4f\n", param_value.param_value);
-    printf("\tType: %d\n", param_value.param_type);
-    printf("\tCount: %d\n", param_value.param_count);
-    printf("\tIndex: %d\n", param_value.param_index);
 }

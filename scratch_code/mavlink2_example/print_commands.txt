@@ -1,0 +1,378 @@
+
+typedef enum MAV_CMD {
+    MAV_CMD_NAV_WAYPOINT=16,
+    MAV_CMD_NAV_LOITER_UNLIM=17,
+    MAV_CMD_NAV_LOITER_TURNS=18,
+    MAV_CMD_NAV_LOITER_TIME=19,
+    MAV_CMD_NAV_RETURN_TO_LAUNCH=20,
+    MAV_CMD_NAV_LAND=21,
+    MAV_CMD_NAV_TAKEOFF=22,
+    MAV_CMD_NAV_LAND_LOCAL=23,
+    MAV_CMD_NAV_TAKEOFF_LOCAL=24,
+    MAV_CMD_NAV_FOLLOW=25,
+    MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT=30,
+    MAV_CMD_NAV_LOITER_TO_ALT=31,
+    MAV_CMD_DO_FOLLOW=32,
+    MAV_CMD_DO_FOLLOW_REPOSITION=33,
+    MAV_CMD_DO_ORBIT=34,
+    MAV_CMD_NAV_ROI=80,
+    MAV_CMD_NAV_PATHPLANNING=81,
+    MAV_CMD_NAV_SPLINE_WAYPOINT=82,
+    MAV_CMD_NAV_VTOL_TAKEOFF=84,
+    MAV_CMD_NAV_VTOL_LAND=85,
+    MAV_CMD_NAV_GUIDED_ENABLE=92,
+    MAV_CMD_NAV_DELAY=93,
+    MAV_CMD_NAV_PAYLOAD_PLACE=94,
+    MAV_CMD_NAV_LAST=95,
+    MAV_CMD_CONDITION_DELAY=112,
+    MAV_CMD_CONDITION_CHANGE_ALT=113,
+    MAV_CMD_CONDITION_DISTANCE=114,
+    MAV_CMD_CONDITION_YAW=115,
+    MAV_CMD_CONDITION_LAST=159,
+    MAV_CMD_DO_SET_MODE=176,
+    MAV_CMD_DO_JUMP=177,
+    MAV_CMD_DO_CHANGE_SPEED=178,
+    MAV_CMD_DO_SET_HOME=179, /* Sets the home position to either the current position or a specified position. |Use current (1=use current location, 0=use specified location), Empty, Empty, Yaw angle (NaN to use default heading), Latitude, Longitude, Altitude */
+    MAV_CMD_DO_SET_PARAMETER=180, /* Set a system parameter. |Parameter number, Parameter value, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_SET_RELAY=181, /* Set a relay to a condition. |Relay instance number, Setting (1=on, 0=off, others possible depending on system hardware), Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_REPEAT_RELAY=182, /* Cycle a relay on and off for a desired number of cycles with a desired period. |Relay instance number, Cycle count, Cycle time, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_SET_SERVO=183, /* Set a servo to a desired PWM value. |Servo instance number, Pulse Width Modulation, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_REPEAT_SERVO=184, /* Cycle a servo between its nominal setting and a desired PWM for a desired number of cycles with a desired period. |Servo instance number, Pulse Width Modulation, Cycle count, Cycle time, Empty, Empty, Empty */
+    MAV_CMD_DO_FLIGHTTERMINATION=185, /* Terminate flight immediately. |Flight termination activated if > 0.5. Otherwise not activated and ACK with MAV_RESULT_FAILED, Empty, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_CHANGE_ALTITUDE=186, /* Change altitude set point. |Altitude, Frame of new altitude, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_SET_ACTUATOR=187, /* Sets actuators (e.g., servos) to a desired value. |Actuator 1 value, scaled from [-1 to 1]. NaN to ignore, Actuator 2 value, scaled from [-1 to 1]. NaN to ignore, Actuator 3 value, scaled from [-1 to 1]. NaN to ignore, Actuator 4 value, scaled from [-1 to 1]. NaN to ignore, Actuator 5 value, scaled from [-1 to 1]. NaN to ignore, Actuator 6 value, scaled from [-1 to 1]. NaN to ignore, Index of actuator set (i.e., if set to 1, Actuator 1 becomes Actuator 7) */
+    MAV_CMD_DO_LAND_START=189, /* Mission command to perform a landing. |Empty, Empty, Empty, Empty, Latitude, Longitude, Altitude */
+    MAV_CMD_DO_RALLY_LAND=190, /* Mission command to perform a landing from a rally point. |Break altitude, Landing speed, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_GO_AROUND=191, /* Mission command to safely abort an autonomous landing. |Altitude, Empty, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_REPOSITION=192, /* Reposition the vehicle to a specific WGS84 global position. |Ground speed (less than 0 (-1) for default), Bitmask of option flags, Loiter radius for planes (Positive values only, direction is controlled by Yaw value. A value of zero or NaN is ignored), Yaw heading (NaN to use the current system yaw heading mode), Latitude, Longitude, Altitude */
+    MAV_CMD_DO_PAUSE_CONTINUE=193, /* If in a GPS controlled position mode, hold the current position or continue. |Pause/hold (0=continue, 1=hold), Empty, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_SET_REVERSE=194, /* Set moving direction to forward or reverse. |Direction (0=forward, 1=reverse), Empty, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_SET_ROI_LOCATION=195, /* Sets the region of interest (ROI) to a location. |Region of interest mode (0=0, 1=transition to waypoint, 2=ROI by index), Empty, Empty, Empty, Latitude, Longitude, Altitude */
+    MAV_CMD_DO_SET_ROI_WPNEXT_OFFSET=196, /* Sets the region of interest (ROI) to be toward next waypoint with offset. |Region of interest mode (0=0, 1=transition to waypoint, 2=ROI by index), Empty, Empty, Empty, X-axis offset (or North offset for ROTATE_RELATIVE_TO_ROI), Y-axis offset (or East offset for ROTATE_RELATIVE_TO_ROI), Z-axis offset (or Down offset for ROTATE_RELATIVE_TO_ROI) */
+    MAV_CMD_DO_SET_ROI_NONE=197, /* Cancels any previous ROI command. |Empty, Empty, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_SET_ROI_SYSID=198, /* Mount tracks system with specified system ID. |System ID, Empty, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_CONTROL_VIDEO=200, /* Control onboard camera system. |Transmission (0=disabled, 1=enabled), Transmission mode (0=broadcast, 1=video stream), Recording (0=disabled, 1=enabled), Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_SET_ROI=201, /* Sets the region of interest (ROI). This can be used by the GCS to control the view of the camera. |Region of interest mode (0=0, 1=transition to waypoint, 2=ROI by index), Empty, Empty, Empty, MAV_ROI_WPNEXT, Empty, Empty */
+    MAV_CMD_DO_DIGICAM_CONFIGURE=202, /* Configure digital camera. |Mode enumeration from 1 to N //P, TV, AV, M, Etc (0 means ignore), Shutter speed in APEX units (0 means ignore), Aperture (0 means ignore), ISO value (0 means ignore), Exposure type enumeration from 1 to N (0 means ignore), Command identity (incremental loop: 0 to 255), Empty */
+    MAV_CMD_DO_DIGICAM_CONTROL=203, /* Control digital camera. |Session control (0=stop, 1=start), Zoom's absolute position (0 means ignore), Zooming step value to offset zoom from the current position, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_MOUNT_CONFIGURE=204, /* Mission command to configure a camera or antenna mount. |Mount operation mode (0=retract, 1=neutral, 2=mavlink targetting, 3=RC targetting), Stabilize roll? (1 = yes, 0 = no), Stabilize pitch? (1 = yes, 0 = no), Stabilize yaw? (1 = yes, 0 = no), Empty, Empty, Empty */
+    MAV_CMD_DO_MOUNT_CONTROL=205, /* Mission command to control a camera or antenna mount. |Pitch (centi-degrees, -10000=down, 10000=up), Roll (centi-degrees, -10000=left, 10000=right), Yaw (centi-degrees, -10000=left, 10000=right), Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_SET_CAM_TRIGG_DIST=206, /* Mission command to set camera trigger distance for this flight. |Camera trigger distance (0 means distance trigger is disabled), Empty, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_FENCE_ENABLE=207, /* Mission command to enable the geofence. |Enable? (0=disable, 1=enable), Empty, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_PARACHUTE=208, /* Mission command to trigger a parachute. |Action (0=disable, 1=enable), Empty, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_MOTOR_TEST=209, /* Mission command to perform motor test. |Motor instance number (from 1 to max number of motors on the vehicle), Throttle type (0=throttle percentage, 1=pwm), Throttle (percentage or PWM value depending on throttle type), Timeout (in seconds), Motor count (count of motors activated while in test), Motor test order (motor instance numbers in sequential order), Empty */
+    MAV_CMD_DO_INVERTED_FLIGHT=210, /* Change to/from inverted flight. |Inverted flight (0=normal, 1=inverted), Empty, Empty, Empty, Empty, Empty, Empty */
+    MAV_CMD_DO_GRIPPER = 211,
+    MAV_CMD_DO_AUTOTUNE_ENABLE = 212,
+    MAV_CMD_NAV_SET_YAW_SPEED = 213,
+    MAV_CMD_DO_SET_CAM_TRIGG_INTERVAL = 214,
+    MAV_CMD_DO_MOUNT_CONTROL_QUAT = 220,
+    MAV_CMD_DO_GUIDED_MASTER = 221,
+    MAV_CMD_DO_GUIDED_LIMITS = 222,
+    MAV_CMD_DO_ENGINE_CONTROL = 223,
+    MAV_CMD_DO_SET_MISSION_CURRENT = 224,
+    MAV_CMD_DO_LAST = 240,
+    MAV_CMD_PREFLIGHT_CALIBRATION = 241,
+    MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS = 242,
+    MAV_CMD_PREFLIGHT_UAVCAN = 243,
+    MAV_CMD_PREFLIGHT_STORAGE = 245,
+    MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN = 246,
+    MAV_CMD_OVERRIDE_GOTO = 252,
+    MAV_CMD_OBLIQUE_SURVEY = 260,
+    MAV_CMD_MISSION_START = 300,
+    MAV_CMD_ACTUATOR_TEST = 310,
+    MAV_CMD_CONFIGURE_ACTUATOR = 311,
+    MAV_CMD_COMPONENT_ARM_DISARM = 400,
+    MAV_CMD_RUN_PREARM_CHECKS = 401,
+    MAV_CMD_ILLUMINATOR_ON_OFF = 405,
+    MAV_CMD_GET_HOME_POSITION = 410,
+    MAV_CMD_INJECT_FAILURE = 420,
+    MAV_CMD_START_RX_PAIR = 500,
+    MAV_CMD_GET_MESSAGE_INTERVAL = 510,
+    MAV_CMD_SET_MESSAGE_INTERVAL = 511,
+    MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES = 520,
+    MAV_CMD_SET_CAMERA_MODE = 530
+} MAV_CMD;
+
+void printMAVCmd(MAV_CMD cmd) {
+    switch (cmd) {
+        case MAV_CMD_NAV_WAYPOINT:
+            printf("MAV_CMD_NAV_WAYPOINT\n");
+            break;
+        case MAV_CMD_NAV_LOITER_UNLIM:
+            printf("MAV_CMD_NAV_LOITER_UNLIM\n");
+            break;
+        case MAV_CMD_NAV_LOITER_TURNS:
+            printf("MAV_CMD_NAV_LOITER_TURNS\n");
+            break;
+        case MAV_CMD_NAV_LOITER_TIME:
+            printf("MAV_CMD_NAV_LOITER_TIME\n");
+            break;
+        case MAV_CMD_NAV_RETURN_TO_LAUNCH:
+            printf("MAV_CMD_NAV_RETURN_TO_LAUNCH\n");
+            break;
+        case MAV_CMD_NAV_LAND:
+            printf("MAV_CMD_NAV_LAND\n");
+            break;
+        case MAV_CMD_NAV_TAKEOFF:
+            printf("MAV_CMD_NAV_TAKEOFF\n");
+            break;
+        case MAV_CMD_NAV_LAND_LOCAL:
+            printf("MAV_CMD_NAV_LAND_LOCAL\n");
+            break;
+        case MAV_CMD_NAV_TAKEOFF_LOCAL:
+            printf("MAV_CMD_NAV_TAKEOFF_LOCAL\n");
+            break;
+        case MAV_CMD_NAV_FOLLOW:
+            printf("MAV_CMD_NAV_FOLLOW\n");
+            break;
+        case MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT:
+            printf("MAV_CMD_NAV_CONTINUE_AND_CHANGE_ALT\n");
+            break;
+        case MAV_CMD_NAV_LOITER_TO_ALT:
+            printf("MAV_CMD_NAV_LOITER_TO_ALT\n");
+            break;
+        case MAV_CMD_DO_FOLLOW:
+            printf("MAV_CMD_DO_FOLLOW\n");
+            break;
+        case MAV_CMD_DO_FOLLOW_REPOSITION:
+            printf("MAV_CMD_DO_FOLLOW_REPOSITION\n");
+            break;
+        case MAV_CMD_DO_ORBIT:
+            printf("MAV_CMD_DO_ORBIT\n");
+            break;
+        case MAV_CMD_NAV_ROI:
+            printf("MAV_CMD_NAV_ROI\n");
+            break;
+        case MAV_CMD_NAV_PATHPLANNING:
+            printf("MAV_CMD_NAV_PATHPLANNING\n");
+            break;
+        case MAV_CMD_NAV_SPLINE_WAYPOINT:
+            printf("MAV_CMD_NAV_SPLINE_WAYPOINT\n");
+            break;
+        case MAV_CMD_NAV_VTOL_TAKEOFF:
+            printf("MAV_CMD_NAV_VTOL_TAKEOFF\n");
+            break;
+        case MAV_CMD_NAV_VTOL_LAND:
+            printf("MAV_CMD_NAV_VTOL_LAND\n");
+            break;
+        case MAV_CMD_NAV_GUIDED_ENABLE:
+            printf("MAV_CMD_NAV_GUIDED_ENABLE\n");
+            break;
+        case MAV_CMD_NAV_DELAY:
+            printf("MAV_CMD_NAV_DELAY\n");
+            break;
+        case MAV_CMD_NAV_PAYLOAD_PLACE:
+            printf("MAV_CMD_NAV_PAYLOAD_PLACE\n");
+            break;
+        case MAV_CMD_NAV_LAST:
+            printf("MAV_CMD_NAV_LAST\n");
+            break;
+        case MAV_CMD_CONDITION_DELAY:
+            printf("MAV_CMD_CONDITION_DELAY\n");
+            break;
+        case MAV_CMD_CONDITION_CHANGE_ALT:
+            printf("MAV_CMD_CONDITION_CHANGE_ALT\n");
+            break;
+        case MAV_CMD_CONDITION_DISTANCE:
+            printf("MAV_CMD_CONDITION_DISTANCE\n");
+            break;
+        case MAV_CMD_CONDITION_YAW:
+            printf("MAV_CMD_CONDITION_YAW\n");
+            break;
+        case MAV_CMD_CONDITION_LAST:
+            printf("MAV_CMD_CONDITION_LAST\n");
+            break;
+        case MAV_CMD_DO_SET_MODE:
+            printf("MAV_CMD_DO_SET_MODE\n");
+            break;
+        case MAV_CMD_DO_JUMP:
+            printf("MAV_CMD_DO_JUMP\n");
+            break;
+        case MAV_CMD_DO_CHANGE_SPEED:
+            printf("MAV_CMD_DO_CHANGE_SPEED\n");
+            break;
+        case MAV_CMD_DO_SET_HOME:
+            printf("MAV_CMD_DO_SET_HOME\n");
+            break;
+        case MAV_CMD_DO_SET_PARAMETER:
+            printf("MAV_CMD_DO_SET_PARAMETER\n");
+            break;
+        case MAV_CMD_DO_SET_RELAY:
+            printf("MAV_CMD_DO_SET_RELAY\n");
+            break;
+        case MAV_CMD_DO_REPEAT_RELAY:
+            printf("MAV_CMD_DO_REPEAT_RELAY\n");
+            break;
+        case MAV_CMD_DO_SET_SERVO:
+            printf("MAV_CMD_DO_SET_SERVO\n");
+            break;
+        case MAV_CMD_DO_REPEAT_SERVO:
+            printf("MAV_CMD_DO_REPEAT_SERVO\n");
+            break;
+        case MAV_CMD_DO_FLIGHTTERMINATION:
+            printf("MAV_CMD_DO_FLIGHTTERMINATION\n");
+            break;
+        case MAV_CMD_DO_CHANGE_ALTITUDE:
+            printf("MAV_CMD_DO_CHANGE_ALTITUDE\n");
+            break;
+        case MAV_CMD_DO_SET_ACTUATOR:
+            printf("MAV_CMD_DO_SET_ACTUATOR\n");
+            break;
+        case MAV_CMD_DO_LAND_START:
+            printf("MAV_CMD_DO_LAND_START\n");
+            break;
+        case MAV_CMD_DO_RALLY_LAND:
+            printf("MAV_CMD_DO_RALLY_LAND\n");
+            break;
+        case MAV_CMD_DO_GO_AROUND:
+            printf("MAV_CMD_DO_GO_AROUND\n");
+            break;
+        case MAV_CMD_DO_REPOSITION:
+            printf("MAV_CMD_DO_REPOSITION\n");
+            break;
+        case MAV_CMD_DO_PAUSE_CONTINUE:
+            printf("MAV_CMD_DO_PAUSE_CONTINUE\n");
+            break;
+        case MAV_CMD_DO_SET_REVERSE:
+            printf("MAV_CMD_DO_SET_REVERSE\n");
+            break;
+        case MAV_CMD_DO_SET_ROI_LOCATION:
+            printf("MAV_CMD_DO_SET_ROI_LOCATION\n");
+            break;
+        case MAV_CMD_DO_SET_ROI_WPNEXT_OFFSET:
+            printf("MAV_CMD_DO_SET_ROI_WPNEXT_OFFSET\n");
+            break;
+        case MAV_CMD_DO_SET_ROI_NONE:
+            printf("MAV_CMD_DO_SET_ROI_NONE\n");
+            break;
+        case MAV_CMD_DO_SET_ROI_SYSID:
+            printf("MAV_CMD_DO_SET_ROI_SYSID\n");
+            break;
+        case MAV_CMD_DO_CONTROL_VIDEO:
+            printf("MAV_CMD_DO_CONTROL_VIDEO\n");
+            break;
+        case MAV_CMD_DO_SET_ROI:
+            printf("MAV_CMD_DO_SET_ROI\n");
+            break;
+        case MAV_CMD_DO_DIGICAM_CONFIGURE:
+            printf("MAV_CMD_DO_DIGICAM_CONFIGURE\n");
+            break;
+        case MAV_CMD_DO_DIGICAM_CONTROL:
+            printf("MAV_CMD_DO_DIGICAM_CONTROL\n");
+            break;
+        case MAV_CMD_DO_MOUNT_CONFIGURE:
+            printf("MAV_CMD_DO_MOUNT_CONFIGURE\n");
+            break;
+        case MAV_CMD_DO_MOUNT_CONTROL:
+            printf("MAV_CMD_DO_MOUNT_CONTROL\n");
+            break;
+        case MAV_CMD_DO_SET_CAM_TRIGG_DIST:
+            printf("MAV_CMD_DO_SET_CAM_TRIGG_DIST\n");
+            break;
+        case MAV_CMD_DO_FENCE_ENABLE:
+            printf("MAV_CMD_DO_FENCE_ENABLE\n");
+            break;
+        case MAV_CMD_DO_PARACHUTE:
+            printf("MAV_CMD_DO_PARACHUTE\n");
+            break;
+        case MAV_CMD_DO_MOTOR_TEST:
+            printf("MAV_CMD_DO_MOTOR_TEST\n");
+            break;
+        case MAV_CMD_DO_INVERTED_FLIGHT:
+            printf("MAV_CMD_DO_INVERTED_FLIGHT\n");
+            break;
+        case MAV_CMD_DO_GRIPPER:
+            printf("MAV_CMD_DO_GRIPPER\n");
+            break;
+        case MAV_CMD_DO_AUTOTUNE_ENABLE:
+            printf("MAV_CMD_DO_AUTOTUNE_ENABLE\n");
+            break;
+        case MAV_CMD_NAV_SET_YAW_SPEED:
+            printf("MAV_CMD_NAV_SET_YAW_SPEED\n");
+            break;
+        case MAV_CMD_DO_SET_CAM_TRIGG_INTERVAL:
+            printf("MAV_CMD_DO_SET_CAM_TRIGG_INTERVAL\n");
+            break;
+        case MAV_CMD_DO_MOUNT_CONTROL_QUAT:
+            printf("MAV_CMD_DO_MOUNT_CONTROL_QUAT\n");
+            break;
+        case MAV_CMD_DO_GUIDED_MASTER:
+            printf("MAV_CMD_DO_GUIDED_MASTER\n");
+            break;
+        case MAV_CMD_DO_GUIDED_LIMITS:
+            printf("MAV_CMD_DO_GUIDED_LIMITS\n");
+            break;
+        case MAV_CMD_DO_ENGINE_CONTROL:
+            printf("MAV_CMD_DO_ENGINE_CONTROL\n");
+            break;
+        case MAV_CMD_DO_SET_MISSION_CURRENT:
+            printf("MAV_CMD_DO_SET_MISSION_CURRENT\n");
+            break;
+        case MAV_CMD_DO_LAST:
+            printf("MAV_CMD_DO_LAST\n");
+            break;
+        case MAV_CMD_PREFLIGHT_CALIBRATION:
+            printf("MAV_CMD_PREFLIGHT_CALIBRATION\n");
+            break;
+        case MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS:
+            printf("MAV_CMD_PREFLIGHT_SET_SENSOR_OFFSETS\n");
+            break;
+        case MAV_CMD_PREFLIGHT_UAVCAN:
+            printf("MAV_CMD_PREFLIGHT_UAVCAN\n");
+            break;
+        case MAV_CMD_PREFLIGHT_STORAGE:
+            printf("MAV_CMD_PREFLIGHT_STORAGE\n");
+            break;
+        case MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN:
+            printf("MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN\n");
+            break;
+        case MAV_CMD_OVERRIDE_GOTO:
+            printf("MAV_CMD_OVERRIDE_GOTO\n");
+            break;
+        case MAV_CMD_OBLIQUE_SURVEY:
+            printf("MAV_CMD_OBLIQUE_SURVEY\n");
+            break;
+        case MAV_CMD_MISSION_START:
+            printf("MAV_CMD_MISSION_START\n");
+            break;
+        case MAV_CMD_ACTUATOR_TEST:
+            printf("MAV_CMD_ACTUATOR_TEST\n");
+            break;
+        case MAV_CMD_CONFIGURE_ACTUATOR:
+            printf("MAV_CMD_CONFIGURE_ACTUATOR\n");
+            break;
+        case MAV_CMD_COMPONENT_ARM_DISARM:
+            printf("MAV_CMD_COMPONENT_ARM_DISARM\n");
+            break;
+        case MAV_CMD_RUN_PREARM_CHECKS:
+            printf("MAV_CMD_RUN_PREARM_CHECKS\n");
+            break;
+        case MAV_CMD_ILLUMINATOR_ON_OFF:
+            printf("MAV_CMD_ILLUMINATOR_ON_OFF\n");
+            break;
+        case MAV_CMD_GET_HOME_POSITION:
+            printf("MAV_CMD_GET_HOME_POSITION\n");
+            break;
+        case MAV_CMD_INJECT_FAILURE:
+            printf("MAV_CMD_INJECT_FAILURE\n");
+            break;
+        case MAV_CMD_START_RX_PAIR:
+            printf("MAV_CMD_START_RX_PAIR\n");
+            break;
+        case MAV_CMD_GET_MESSAGE_INTERVAL:
+            printf("MAV_CMD_GET_MESSAGE_INTERVAL\n");
+            break;
+        case MAV_CMD_SET_MESSAGE_INTERVAL:
+            printf("MAV_CMD_SET_MESSAGE_INTERVAL\n");
+            break;
+        case MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES:
+            printf("MAV_CMD_REQUEST_AUTOPILOT_CAPABILITIES\n");
+            break;
+        case MAV_CMD_SET_CAMERA_MODE:
+            printf("MAV_CMD_SET_CAMERA_MODE\n");
+            break;
+        default:
+            printf("Unknown command\n");
+            break;
+   }
