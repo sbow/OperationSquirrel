@@ -20,19 +20,32 @@ void startup_sequence(void)
     uint8_t buffer[MAVLINK_MAX_PACKET_LEN]; // define length of buffer
     mavlink_message_t msg; // initialize the Mavlink message buffer
 
-    // Set the flight mode
-    // enable or disable custom mode (including guided), mode # (found in mode.cpp), custom submode, empty, etc
+    // Set flight mode to guided
+    // enable or disable custom mode (including guided), mode # (found in mode.h), custom submode, empty, etc
     mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 1, 1, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 4, 0, 0, 0, 0, 0);
     offset_buffer(buffer, len, msg);
     
-    // Command to ARM the drone
+    // ARM the drone
     mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 1, 1, MAV_CMD_COMPONENT_ARM_DISARM, 0, 1, 1, 0, 0, 0, 0, 0);
     offset_buffer(buffer, len, msg);
 
-    // Command to takeoff
+    // Takeoff
     mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_NAV_TAKEOFF, 0, 0, 0, 0, 0, 0, 0, 15.0);
     offset_buffer(buffer, len, msg);
 
-    // Send request to flight controller
+    // Send commands to flight controller
+    write_msg_request(buffer, len);
+}
+
+void landing_sequence(void)
+{
+    uint16_t len = 0; // length of buffer
+    uint8_t buffer[MAVLINK_MAX_PACKET_LEN]; // define length of buffer
+    mavlink_message_t msg; // initialize the Mavlink message buffer
+
+    // Set flight mode to RTL
+    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 1, 1, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 6, 0, 0, 0, 0, 0);
+    offset_buffer(buffer, len, msg);
+
     write_msg_request(buffer, len);
 }

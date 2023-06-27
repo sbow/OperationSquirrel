@@ -1,3 +1,4 @@
+#include "global_objects.h"
 #include <mavlink.h>
 #include "print_mavlink.h"
 #include "handle_serial_port.h"
