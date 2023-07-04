@@ -81,7 +81,13 @@ void get_messages(void)
             case MAVLINK_MSG_ID_GPS_RAW_INT:
                 mavlink_gps_raw_int_t msg_gps_raw_int;
                 mavlink_msg_gps_raw_int_decode(&msg, &msg_gps_raw_int);
-                print_gps_raw_int(msg_gps_raw_int);
+                latitude = msg_gps_raw_int.lat;
+                longitude = msg_gps_raw_int.lon;
+                altitude = msg_gps_raw_int.alt;
+                printf("Lat: %u\n", latitude);
+                printf("Lon: %u\n", longitude);
+                printf("Alt: %u\n", altitude);
+                //print_gps_raw_int(msg_gps_raw_int);
                 break;
             case MAVLINK_MSG_ID_ATTITUDE:
                 mavlink_attitude_t msg_attitude;
