@@ -1,8 +1,8 @@
-# Setting up ArduPilot SITL demystified
+# Setting up the OperationSquirrel workflow
 
-The complete instructions are here https://ardupilot.org/dev/docs/building-setup-windows10.html#building-setup-windows10 but it can be a little confusing because it takes you to some other pages so then you’ll have to follow those steps and come back to that link.  Hopefully this will make things less confusing.  But if this guide fails you can always refer to the original documentation.  This page only shows how to set up the environment, not how to run the SITL.  But I will include a link to basic SITL usage.
+## Summary
+This document will guide you through setting up the entire workflow, including setting up the ArduPilot SITL, using the SITL, and connecting to SITL with the companion computer code.  The complete instructions for setting up SITL are here https://ardupilot.org/dev/docs/building-setup-windows10.html#building-setup-windows10 but it can be a little confusing because it takes you to some other pages so then you’ll have to follow those steps and come back to that link.  Hopefully this will make things less confusing.  But if this guide fails you can always refer to the original documentation.  This page only shows how to set up the environment, not how to run the SITL.  But I will include a link to basic SITL usage.  You really only end up doing two things when setting up the SITL:
 
-## High level, you’re really only doing 2 things to be able to run the SITL.
 1. Install WSL2
 2. Clone the ardupilot repo
     
@@ -42,9 +42,8 @@ But it’s a tiny bit more nuanced than that.  And I'll get into that below.
         - This will help you just get the thing up in the air so you can see it move.  Very basic but it's the              "hello world" of ArduPilot SITL.
         
 ## How to use our code to communicate with SITL
-1. I have a couple of examples that will arm the drone, make it take off, and then land.
+1. If you've made it this far let me know and I'll update this part of the instructions.
+2. I have a couple of examples that will arm the drone, make it take off, and then land.
     - https://github.com/sbow/OperationSquirrel/tree/cams-branch/scratch_code
         - The **mavlink2_example** folder contains code that will build and run on the Nvidia Jetson-Nano and has           instructions on how to use it.
-        - The **sitl_example_TCP_WSL2** example should just compile on WSL2 and then you can just run it.  I need 
-          to update those instructions so you can try it yourself, just start SITL and then build and run the code
-          .  Or ask me since I need to update the instructions.
+        - The **sitl_example_TCP_WSL2** example should just compile on WSL2 and then you can just run it.
