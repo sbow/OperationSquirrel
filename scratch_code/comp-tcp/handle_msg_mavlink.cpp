@@ -28,7 +28,7 @@ void set_message_rates(void)
     mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_SET_MESSAGE_INTERVAL, 0, MAVLINK_MSG_ID_ATTITUDE, MESSAGE_INTERVAL, 0, 0, 0, 0, 0);
     offset_buffer(buffer, len, msg);
 
-    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_SET_MESSAGE_INTERVAL, 0, MAVLINK_MSG_ID_GPS_RAW_INT, MESSAGE_INTERVAL, 0, 0, 0, 0, 0);
+    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_SET_MESSAGE_INTERVAL, 0, MAVLINK_MSG_ID_GLOBAL_POSITION_INT, MESSAGE_INTERVAL, 0, 0, 0, 0, 0);
     offset_buffer(buffer, len, msg);
 
     // Send request to flight controller
@@ -48,7 +48,7 @@ void request_messages(void)
     mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_REQUEST_MESSAGE, 0, MAVLINK_MSG_ID_ATTITUDE, 0, 0, 0, 0, 0, 0);
     offset_buffer(buffer, len, msg);
     
-    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_REQUEST_MESSAGE, 0, MAVLINK_MSG_ID_GPS_RAW_INT, 0, 0, 0, 0, 0, 0);
+    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_REQUEST_MESSAGE, 0, MAVLINK_MSG_ID_GLOBAL_POSITION_INT, 0, 0, 0, 0, 0, 0);
     offset_buffer(buffer, len, msg);
 
     // Send request to flight controller
@@ -93,27 +93,27 @@ void get_messages(void)
                 case MAVLINK_MSG_ID_GPS_RAW_INT:
                     mavlink_gps_raw_int_t msg_gps_raw_int;
                     mavlink_msg_gps_raw_int_decode(&msg, &msg_gps_raw_int);
-                    latitude = msg_gps_raw_int.lat;
-                    longitude = msg_gps_raw_int.lon;
-                    altitude = msg_gps_raw_int.alt;
-                    printf("Lat: %u\n", latitude);
-                    printf("Lon: %u\n", longitude);
-                    printf("Alt: %u\n", altitude);
                     //print_gps_raw_int(msg_gps_raw_int);
                 case MAVLINK_MSG_ID_ATTITUDE:
                     mavlink_attitude_t msg_attitude;
                     mavlink_msg_attitude_decode(&msg, &msg_attitude);
-                    print_attitude(msg_attitude);
+                    //print_attitude(msg_attitude);
                     break;
                 case MAVLINK_MSG_ID_RAW_IMU:
                     mavlink_raw_imu_t msg_raw_imu;
                     mavlink_msg_raw_imu_decode(&msg, &msg_raw_imu);
-                    print_raw_imu(msg_raw_imu);
+                    //print_raw_imu(msg_raw_imu);
                     break;
                 case MAVLINK_MSG_ID_GLOBAL_POSITION_INT:
                     mavlink_global_position_int_t global_pos_int;
                     mavlink_msg_global_position_int_decode(&msg, &global_pos_int);
-                    print_global_position_int(global_pos_int);
+                    latitude = global_pos_int.lat;
+                    longitude = global_pos_int.lon;
+                    altitude = global_pos_int.alt;
+                    printf("Lat: %u\n", latitude);
+                    printf("Lon: %u\n", longitude);
+                    printf("Alt: %u\n", altitude);
+                    //print_global_position_int(global_pos_int);
                     break;
                 case MAVLINK_MSG_ID_COMMAND_ACK:
                     mavlink_command_ack_t command_ack;
