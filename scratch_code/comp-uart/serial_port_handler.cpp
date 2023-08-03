@@ -1,9 +1,9 @@
-#include "handle_serial_port.h"
+#include "serial_port_handler.h"
 
 #define SERIAL_PORT "/dev/ttyTHS1"
 #define BAUD_RATE B115200
 
-int serial_port;
+int serial_port = 0;
 
 void open_serial_port(void)
 {

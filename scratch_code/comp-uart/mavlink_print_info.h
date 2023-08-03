@@ -1,4 +1,7 @@
-#include <mavlink.h>
+#ifndef MAVLINK_PRINT_INFO_H
+#define MAVLINK_PRINT_INFO_H
+
+#include "standard_libs.h"
 
 // Function prototypes
 void print_heartbeat(mavlink_heartbeat_t &heartbeat);
@@ -20,3 +23,5 @@ void print_local_position(mavlink_local_position_ned_t& local_position);
 void print_rc_channels_scaled(mavlink_rc_channels_scaled_t& rc_channels_scaled);
 void print_servo_output_raw(mavlink_servo_output_raw_t& servo_output_raw);
 void print_scaled_imu(mavlink_scaled_imu_t& scaled_imu);
+
+#endif // MAVLINK_PRINT_INFO_H

@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -I./inc/mavlink/v2.0/common
+CFLAGS = -I./inc/mavlink/v2.0/common -I.
 
 # get list of all .cpp files in the source directory
 SRCS := $(wildcard *.cpp)
@@ -16,7 +16,7 @@ all: main
 
 # link object files into executable
 main: $(OBJ)
-	$(CC) $(OBJ) -o $@
+	$(CC) $(OBJ) -o $@ -lrt
 
 # clean up object and executable files
 clean:
