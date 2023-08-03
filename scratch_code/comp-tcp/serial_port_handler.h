@@ -1,3 +1,8 @@
+#ifndef SERIAL_PORT_HANDLER_H
+#define SERIAL_PORT_HANDLER_H
+
+#include "standard_libs.h"
+
 #define _POSIX_C_SOURCE 200809L // enable certain POSIX-specific functionality
 
 #include <mavlink.h>
@@ -17,3 +22,5 @@ void offset_buffer(uint8_t* buffer, uint16_t &len, mavlink_message_t &msg);
 void clear_buffer(uint8_t* buffer, uint16_t len);
 void close_serial_port(void);
 void connect_to_sitl(void);
+
+#endif // SERIAL_PORT_HANDLER_H

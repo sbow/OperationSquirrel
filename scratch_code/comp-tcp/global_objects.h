@@ -1,5 +1,6 @@
-#include <stdint.h>
+#ifndef GLOBAL_OBJECTS_H
+#define GLOBAL_OBJECTS_H
 
-extern int32_t altitude;
-extern int32_t latitude;
-extern int32_t longitude;
+#include "standard_libs.h"
+
+#endif // GLOBAL_OBJECTS_H
