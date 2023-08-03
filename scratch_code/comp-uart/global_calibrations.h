@@ -3,6 +3,4 @@
 
 #include "standard_libs.h"
 
-
-
 #endif // GLOBAL_CALIBRATIONS_H
