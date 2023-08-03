@@ -13,7 +13,7 @@ const uint8_t SENDER_SYS_ID = 0;
 const uint8_t SENDER_COMP_ID = 0;
 const uint8_t TARGET_SYS_ID = 1;
 const uint8_t TARGET_COMP_ID = 1;
-const int32_t MESSAGE_INTERVAL = 10000; // microseconds
+const int32_t MESSAGE_INTERVAL = 12.5e3; // microseconds
 
 void startup_sequence(void)
 {
@@ -23,11 +23,11 @@ void startup_sequence(void)
 
     // Set flight mode to guided
     // enable or disable custom mode (including guided), mode # (found in mode.h), custom submode, empty, etc
-    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 1, 1, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 4, 0, 0, 0, 0, 0);
+    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 4, 0, 0, 0, 0, 0);
     offset_buffer(buffer, len, msg);
     
     // ARM the drone
-    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 1, 1, MAV_CMD_COMPONENT_ARM_DISARM, 0, 1, 1, 0, 0, 0, 0, 0);
+    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_COMPONENT_ARM_DISARM, 0, 1, 1, 0, 0, 0, 0, 0);
     offset_buffer(buffer, len, msg);
 
     // Takeoff
@@ -45,7 +45,7 @@ void landing_sequence(void)
     mavlink_message_t msg; // initialize the Mavlink message buffer
 
     // Set flight mode to RTL
-    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 1, 1, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 6, 0, 0, 0, 0, 0);
+    mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 6, 0, 0, 0, 0, 0);
     offset_buffer(buffer, len, msg);
 
     write_msg_request(buffer, len);

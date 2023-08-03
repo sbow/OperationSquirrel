@@ -18,8 +18,7 @@ float C_alt = 5;
 
 void countupTimer(void)
 {
-    timerVal = timerVal + dt;
-    printf("timer: %.3f\n", timerVal);
+    timerVal = timerVal + dt; // printf("Timer: %.3f\n", timerVal);
 }
 
 void resetTimer(void)

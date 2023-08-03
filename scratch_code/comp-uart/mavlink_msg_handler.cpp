@@ -94,13 +94,7 @@ void get_messages(void)
             case MAVLINK_MSG_ID_GLOBAL_POSITION_INT:
                 mavlink_global_position_int_t global_pos_int;
                 mavlink_msg_global_position_int_decode(&msg, &global_pos_int);
-                latitude = global_pos_int.lat;
-                longitude = global_pos_int.lon;
-                altitude = global_pos_int.alt;
-                printf("Lat: %u\n", latitude);
-                printf("Lon: %u\n", longitude);
-                printf("Alt: %u\n", altitude);
-                //print_global_position_int(global_pos_int);
+                print_global_position_int(global_pos_int);
                 break;
             case MAVLINK_MSG_ID_COMMAND_ACK:
                 mavlink_command_ack_t command_ack;

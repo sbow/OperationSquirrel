@@ -49,8 +49,7 @@ void task_25ms(int sig, siginfo_t* si, void* uc)
 {
     std::lock_guard<std::mutex> lock(mutex);
 
-    calcExecutionTime(); // 
-    //std::cout << "Elapsed Time: " << elapsedTimeMS << ", ";
-    //countupTimer();
+    calcExecutionTime(); // printf("Elapsed Time: %d: \n", elapsedTimeMS);
+    get_messages();
     test_flight_1();
 }
