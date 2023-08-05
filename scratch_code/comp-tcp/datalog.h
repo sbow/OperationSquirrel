@@ -1,16 +1,9 @@
-#ifndef MAVLINK_MSG_HANDLER_H
-#define MAVLINK_MSG_HANDLER_H
+#ifndef DATALOG_H
+#define DATALOG_H
 
 #include "standard_libs.h"
-#include "mavlink_print_info.h"
-#include "serial_port_handler.h"
 
-extern const uint8_t SENDER_SYS_ID;
-extern const uint8_t SENDER_COMP_ID;
-extern const uint8_t TARGET_SYS_ID;
-extern const uint8_t TARGET_COMP_ID;
-extern const int32_t MESSAGE_INTERVAL; // microseconds
-
+extern float elapsedTimeSeconds;
 extern int32_t lat;
 extern int32_t lon;
 extern int32_t alt;
@@ -35,8 +28,11 @@ extern int16_t xmag;
 extern int16_t ymag;
 extern int16_t zmag;
 
-void set_message_rates(void);
-void request_messages(void);
-void get_messages(void);
+template <typename T>
+std::string toString(const T& value);
 
-#endif // MAVLINK_MSG_HANDLER_H
+void logData(void);
+void writeToCSV(const std::string& filename, const std::vector<std::vector<std::string>>& data);
+std::string checkAndAppendFileName(const std::string& filename);
+
+#endif // DATALOG_H

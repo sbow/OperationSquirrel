@@ -6,7 +6,7 @@ struct sockaddr_in sim_addr;
 
 int sock;
 
-void open_socket(void)
+void open_serial_port(void)
 {
     // Create a socket for the TCP connection
     sock = socket(AF_INET, SOCK_STREAM, 0);
@@ -14,18 +14,12 @@ void open_socket(void)
     {
         fprintf(stderr,"Error creating socket\n");
     }
-}
 
-void configure_socket(void)
-{
     // Configure the address for the TCP connection
     sim_addr.sin_family = AF_INET;
     sim_addr.sin_addr.s_addr = inet_addr(SIM_IP);
     sim_addr.sin_port = htons(SIM_PORT);
-}
 
-void connect_to_sitl(void)
-{
     // Connect to the SITL simulation
     if (connect(sock, (struct sockaddr *)&sim_addr, sizeof(sim_addr)) < 0)
     {

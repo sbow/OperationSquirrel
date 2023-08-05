@@ -1,24 +1,38 @@
 #include "time_calc.h"
 
-bool firstLoopAfterStartup = true;
-long long startTimeMS = 0;
-long long elapsedTimeMS = 0;
+float elapsedTimeSeconds = (float)0.0;
+const float timeStep = (float)0.025;
+std::chrono::time_point<std::chrono::high_resolution_clock> startTime = std::chrono::high_resolution_clock::now();
+std::chrono::time_point<std::chrono::high_resolution_clock> currentTime = std::chrono::high_resolution_clock::now();
+std::chrono::duration<float, std::milli> elapsedTime(0.0);
 
 void calcStartTimeMS(void)
 {
     // Get the start time
-    auto now = std::chrono::high_resolution_clock::now();
-    startTimeMS = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
+    startTime = std::chrono::high_resolution_clock::now();
 }
 
 void calcExecutionTime(void)
 {
-    // Get the current timestamp in milliseconds
-    auto now = std::chrono::high_resolution_clock::now();
-    auto timestamp = std::chrono::duration_cast<std::chrono::milliseconds>(now.time_since_epoch()).count();
+    if (firstLoopAfterStartup == true)
+    {
+        elapsedTimeSeconds = (float)0.0;
+    }
+    else
+    {
+        // Get the current timestamp
+        currentTime = std::chrono::high_resolution_clock::now();
 
-    // Calculate the elapsed time since the start of the program
-    elapsedTimeMS = timestamp - startTimeMS;
+        // Calculate the elapsed time since the start of the program
+        elapsedTime = currentTime - startTime;
 
-    elapsedTimeMS = elapsedTimeMS - (long long)25;
+        // Convert elapsed time to seconds with millisecond precision
+        float elapsedTimeSecondsTMP = elapsedTime.count() / 1000.0;
+
+        // Truncate the number to three decimal places
+        elapsedTimeSeconds = (floor(elapsedTimeSecondsTMP * 1000.0) / 1000.0 - timeStep);
+
+        // Print program run time
+        // printf("Elapsed Time: %0.3f\n", elapsedTimeSeconds);
+    }
 }

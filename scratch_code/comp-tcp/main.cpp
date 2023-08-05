@@ -1,10 +1,12 @@
 // Custom headers
 #include "standard_libs.h"
 #include "global_objects.h"
+#include "global_calibrations.h"
 #include "serial_port_handler.h"
 #include "mavlink_msg_handler.h"
 #include "mavlink_command_handler.h"
 #include "scheduler.h"
+#include "datalog.h"
 #include "time_calc.h"
 
 // Test flights
@@ -32,9 +34,7 @@ void initialize(void)
     setupTask_25ms();
 
     // Setup serial communication
-    open_socket();
-    configure_socket();
-    connect_to_sitl();
+    open_serial_port();
 
     // Set rates and request mavlink data from the flight controller
     set_message_rates();
@@ -48,8 +48,12 @@ void initialize(void)
 void task_25ms(int sig, siginfo_t* si, void* uc)
 {
     std::lock_guard<std::mutex> lock(mutex);
-
-    calcExecutionTime(); // printf("Elapsed Time: %d: \n", elapsedTimeMS);
-    get_messages();
+    calcExecutionTime();
     test_flight_1();
+    logData();
+
+    if (firstLoopAfterStartup == true)
+    {
+        firstLoopAfterStartup = false;
+    }
 }

@@ -1,8 +1,29 @@
 #include "mavlink_msg_handler.h"
 
-int32_t latitude = 0;
-int32_t longitude = 0;
-int32_t altitude = 0;
+
+int32_t lat = 0; /*< [degE7] Latitude, expressed*/
+int32_t lon = 0; /*< [degE7] Longitude, expressed*/
+int32_t alt = 0; /*< [mm] Altitude (MSL). Note that virtually all GPS modules provide both WGS84 and MSL.*/
+int32_t relative_alt = 0; /*< [mm] Altitude above ground*/
+int16_t vx = 0; /*< [cm/s] Ground X Speed (Latitude, positive north)*/
+int16_t vy = 0; /*< [cm/s] Ground Y Speed (Longitude, positive east)*/
+int16_t vz = 0; /*< [cm/s] Ground Z Speed (Altitude, positive down)*/
+uint16_t hdg = 0; /*< [cdeg] Vehicle heading (yaw angle), 0.0..359.99 degrees. If unknown, set to: UINT16_MAX*/
+float roll = 0.0; /*< [rad] Roll angle (-pi..+pi)*/
+float pitch = 0.0; /*< [rad] Pitch angle (-pi..+pi)*/
+float yaw = 0.0; /*< [rad] Yaw angle (-pi..+pi)*/
+float rollspeed = 0.0; /*< [rad/s] Roll angular speed*/
+float pitchspeed = 0.0; /*< [rad/s] Pitch angular speed*/
+float yawspeed = 0.0; /*< [rad/s] Yaw angular speed*/
+int16_t xacc = 0; /*< [mG] X acceleration*/
+int16_t yacc = 0; /*< [mG] Y acceleration*/
+int16_t zacc = 0; /*< [mG] Z acceleration*/
+int16_t xgyro = 0; /*< [mrad/s] Angular speed around X axis*/
+int16_t ygyro = 0; /*< [mrad/s] Angular speed around Y axis*/
+int16_t zgyro = 0; /*< [mrad/s] Angular speed around Z axis*/
+int16_t xmag = 0; /*< [mgauss] X Magnetic field*/
+int16_t ymag = 0; /*< [mgauss] Y Magnetic field*/
+int16_t zmag = 0; /*< [mgauss] Z Magnetic field*/
 
 void set_message_rates(void)
 {
