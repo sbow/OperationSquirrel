@@ -77,6 +77,21 @@ void print_global_position_int(mavlink_global_position_int_t &global_pos_int)
     printf("\tAltitude: %d\n", global_pos_int.alt);
 }
 
+void print_scaled_imu(mavlink_raw_imu_t &scaled_imu) 
+{
+    printf("Scaled IMU data:\n");
+    printf("\tTime: %llu\n", (unsigned long long)scaled_imu.time_usec);
+    printf("\tX acceleration: %d\n", scaled_imu.xacc);
+    printf("\tY acceleration: %d\n", scaled_imu.yacc);
+    printf("\tZ acceleration: %d\n", scaled_imu.zacc);
+    printf("\tX gyro: %d\n", scaled_imu.xgyro);
+    printf("\tY gyro: %d\n", scaled_imu.ygyro);
+    printf("\tZ gyro: %d\n", scaled_imu.zgyro);
+    printf("\tX magnetometer: %d\n", scaled_imu.xmag);
+    printf("\tY magnetometer: %d\n", scaled_imu.ymag);
+    printf("\tZ magnetometer: %d\n", scaled_imu.zmag);
+}
+
 void print_raw_imu(mavlink_raw_imu_t &raw_imu) 
 {
     printf("Raw IMU data:\n");

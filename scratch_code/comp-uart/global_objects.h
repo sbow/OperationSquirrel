@@ -3,4 +3,6 @@
 
 #include "standard_libs.h"
 
+extern bool firstLoopAfterStartup;
+
 #endif // GLOBAL_OBJECTS_H

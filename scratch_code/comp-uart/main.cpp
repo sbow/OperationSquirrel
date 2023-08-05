@@ -1,10 +1,12 @@
 // Custom headers
 #include "standard_libs.h"
 #include "global_objects.h"
+#include "global_calibrations.h"
 #include "serial_port_handler.h"
 #include "mavlink_msg_handler.h"
 #include "mavlink_command_handler.h"
 #include "scheduler.h"
+#include "datalog.h"
 #include "time_calc.h"
 
 // Test flights
@@ -47,7 +49,12 @@ void initialize(void)
 void task_25ms(int sig, siginfo_t* si, void* uc)
 {
     std::lock_guard<std::mutex> lock(mutex);
-
-    calcExecutionTime(); // printf("Elapsed Time: %d\n", elapsedTimeMS);
+    calcExecutionTime();
     test_flight_1();
+    logData();
+
+    if (firstLoopAfterStartup == true)
+    {
+        firstLoopAfterStartup = false;
+    }
 }

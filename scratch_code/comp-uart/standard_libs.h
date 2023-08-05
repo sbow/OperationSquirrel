@@ -15,5 +15,13 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <unistd.h>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <iomanip>
+
+// Customer headers for global objects
+#include "global_objects.h"
 
 #endif // STANDARD_LIBS

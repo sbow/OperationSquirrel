@@ -3,9 +3,7 @@
 
 #include "standard_libs.h"
 
-extern bool firstLoopAfterStartup;
-extern long long startTimeMS;
-extern long long elapsedTimeMS;
+extern float elapsedTimeSeconds;
 
 void calcStartTimeMS(void);
 void calcExecutionTime(void);

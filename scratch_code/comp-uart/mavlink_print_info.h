@@ -9,6 +9,7 @@ void print_sys_status(mavlink_sys_status_t &sys_status);
 void print_gps_raw_int(mavlink_gps_raw_int_t &gps_raw_int);
 void print_attitude(mavlink_attitude_t &attitude);
 void print_global_position_int(mavlink_global_position_int_t &global_pos_int);
+void print_scaled_imu(mavlink_raw_imu_t &scaled_imu);
 void print_raw_imu(mavlink_raw_imu_t &raw_imu);
 void print_command_ack(mavlink_command_ack_t &command_ack);
 void print_param_request_read(mavlink_param_request_read_t &param_request_read);
