@@ -4,6 +4,7 @@
 #include "standard_libs.h"
 #include "mavlink_print_info.h"
 #include "serial_port_handler.h"
+#include "mavlink_command_handler.h"
 
 extern const uint8_t SENDER_SYS_ID;
 extern const uint8_t SENDER_COMP_ID;

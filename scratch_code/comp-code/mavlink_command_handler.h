@@ -14,4 +14,9 @@ void startup_sequence(void);
 void landing_sequence(void);
 void go_to_waypoint(int32_t lat, int32_t lon, float alt);
 
+void send_command_long(uint16_t, uint16_t); // command, msg id
+void send_command_long(uint16_t, uint16_t, float); //command, msg id, message rate
+void send_command_long(uint16_t, uint8_t, float, float, float, float, float, float, float); // command, confirmation, param1 - param7
+void set_position_target_global_int(uint8_t, uint16_t, int32_t, int32_t, float, float, float, float, float, float, float, float, float); // coordinate_frame, type_mask, lat_int, lon_int, alt, vx, vy, vz, afx, afy, afz, yaw, yaw_rate
+
 #endif // MAVLINK_COMMAND_HANDLER_H
