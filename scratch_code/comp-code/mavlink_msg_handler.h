@@ -37,6 +37,6 @@ extern int16_t zmag;
 
 void set_message_rates(void);
 void request_messages(void);
-void get_messages(void);
+void parse_serial_data(void);
 
 #endif // MAVLINK_MSG_HANDLER_H

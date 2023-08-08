@@ -26,7 +26,7 @@
         tcsetattr(serial_port, TCSANOW, &serial_config);
     }
 
-    void write_msg_request(uint8_t* buffer, uint16_t len)
+    void write_serial_port(uint8_t* buffer, uint16_t len)
     {
         // Write to serial port
         uint16_t n = write(serial_port, buffer, len);
@@ -95,7 +95,7 @@
         fcntl(sock, F_SETFL, flags | O_NONBLOCK);
     }
 
-    void write_msg_request(uint8_t* buffer, uint16_t len)
+    void write_serial_port(uint8_t* buffer, uint16_t len)
     {
         // Write to serial port
         uint16_t n = sendto(sock, buffer, len, 0, (struct sockaddr*)&sim_addr, sizeof(sim_addr));

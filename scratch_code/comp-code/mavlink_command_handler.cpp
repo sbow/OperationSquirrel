@@ -35,7 +35,7 @@ void startup_sequence(void)
     offset_buffer(buffer, len, msg);
 
     // Send commands to flight controller
-    write_msg_request(buffer, len);
+    write_serial_port(buffer, len);
 }
 
 void landing_sequence(void)
@@ -48,7 +48,7 @@ void landing_sequence(void)
     mavlink_msg_command_long_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 6, 0, 0, 0, 0, 0);
     offset_buffer(buffer, len, msg);
 
-    write_msg_request(buffer, len);
+    write_serial_port(buffer, len);
 }
 
 void go_to_waypoint(int32_t lat, int32_t lon, float alt)
@@ -63,5 +63,5 @@ void go_to_waypoint(int32_t lat, int32_t lon, float alt)
 
     offset_buffer(buffer, len, msg);
 
-    write_msg_request(buffer, len);
+    write_serial_port(buffer, len);
 }
