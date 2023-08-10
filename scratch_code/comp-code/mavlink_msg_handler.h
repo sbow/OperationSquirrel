@@ -4,6 +4,7 @@
 #include "standard_libs.h"
 #include "mavlink_print_info.h"
 #include "serial_port_handler.h"
+#include "mavlink_command_handler.h"
 
 extern const uint8_t SENDER_SYS_ID;
 extern const uint8_t SENDER_COMP_ID;
@@ -37,6 +38,6 @@ extern int16_t zmag;
 
 void set_message_rates(void);
 void request_messages(void);
-void get_messages(void);
+void parse_serial_data(void);
 
 #endif // MAVLINK_MSG_HANDLER_H
