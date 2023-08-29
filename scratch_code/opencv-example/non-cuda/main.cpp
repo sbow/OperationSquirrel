@@ -2,16 +2,16 @@
 
 int main()
 {
-    openCamera();
+    open_camera();
 
     cv::Mat frame;
 
     std::cout << "Hit ESC to exit" << "\n";
     while (true)
     {
-        grabCameraFrames(frame);
+        grab_cameraFrames(frame);
         
-        displayCameraFeed(frame);
+        display_cameraFeed(frame);
 
         int keycode = cv::waitKey(10) & 0xff;
         if (keycode == 27)

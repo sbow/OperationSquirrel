@@ -1,5 +1,6 @@
 #include "camera_handler.h"
 
+cv::cuda::GpuMat gpuFrame;
 cv::VideoCapture cap;
 
 std::string gstreamer_pipeline(int capture_width, int capture_height, int display_width, int display_height, int framerate, int flip_method) 
@@ -10,7 +11,7 @@ std::string gstreamer_pipeline(int capture_width, int capture_height, int displa
            std::to_string(display_height) + ", format=(string)BGRx ! videoconvert ! video/x-raw, format=(string)BGR ! appsink";
 }
 
-void openCamera()
+void open_camera()
 {
     int capture_width = 1280 ;
     int capture_height = 720 ;
@@ -35,7 +36,28 @@ void openCamera()
     }
 }
 
-void displayCameraFeed(const cv::Mat& frame)
+void grab_cameraFrames(cv::Mat& frame)
+{
+    if (!cap.isOpened())
+    {
+        std::cout << "Camera is not opened." << std::endl;
+        return;
+    }
+
+    cap.read(frame);
+}
+
+void process_frameWithCuda(cv::Mat& frame)
+{
+    gpuFrame.upload(frame);
+
+    // Perform CUDA operations here
+    cv::cuda::cvtColor(gpuFrame, gpuFrame, cv::COLOR_BGR2GRAY); // Example CUDA operation
+
+    gpuFrame.download(frame);
+}
+
+void display_cameraFeed(const cv::Mat& frame)
 {
     if (!frame.empty())
     {
@@ -47,13 +69,3 @@ void displayCameraFeed(const cv::Mat& frame)
     }
 }
 
-void grabCameraFrames(cv::Mat& frame)
-{
-    if (!cap.isOpened())
-    {
-        std::cout << "Camera is not opened." << std::endl;
-        return;
-    }
-
-    cap.read(frame);
-}

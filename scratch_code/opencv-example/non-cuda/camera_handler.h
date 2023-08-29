@@ -5,8 +5,8 @@
 #include <opencv2/opencv.hpp>
 
 std::string gstreamer_pipeline(int capture_width, int capture_height, int display_width, int display_height, int framerate, int flip_method);
-void openCamera(void);
-void displayCameraFeed(const cv::Mat& frame);
-void grabCameraFrames(cv::Mat& frame);
+void open_camera(void);
+void grab_cameraFrames(cv::Mat& frame);
+void display_cameraFeed(const cv::Mat& frame);
 
 #endif // CAMERA_HANDLER_H
