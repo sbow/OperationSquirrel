@@ -47,7 +47,7 @@ void landing_sequence(void)
 
 void go_to_waypoint(int32_t lat, int32_t lon, float alt)
 {
-    set_position_target_global_int(MAV_FRAME_GLOBAL_RELATIVE_ALT_INT, (uint16_t)0b111111111000, lat, lon, alt, 0, 0, 0, 0, 0, 0, 0, 0); //mavlink_msg_command_int_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 6, 0, 0, -35.3671 * 1e7, 149.1649 * 1e7, 0); is used for AUTO mode?
+    send_cmd_set_position_target_global_int(MAV_FRAME_GLOBAL_RELATIVE_ALT_INT, (uint16_t)0b111111111000, lat, lon, alt, 0, 0, 0, 0, 0, 0, 0, 0); //mavlink_msg_command_int_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, TARGET_SYS_ID, TARGET_COMP_ID, MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 6, 0, 0, -35.3671 * 1e7, 149.1649 * 1e7, 0); is used for AUTO mode?
 }
 
 // Set message rate implementation
@@ -87,13 +87,25 @@ void send_command_long(uint16_t mavlink_command, uint8_t confirmation, float par
 }
 
 // Send to waypoint
-void set_position_target_global_int(uint8_t coordinate_frame, uint16_t type_mask, int32_t lat_int, int32_t lon_int, float alt, float vx, float vy, float vz, float afx, float afy, float afz, float yaw, float yaw_rate) 
+void send_cmd_set_position_target_global_int(uint8_t coordinate_frame, uint16_t type_mask, int32_t lat_int, int32_t lon_int, float alt, float vx, float vy, float vz, float afx, float afy, float afz, float yaw, float yaw_rate) 
 {
     uint16_t len = 0; // length of buffer
     uint8_t buffer[MAVLINK_MAX_PACKET_LEN]; // define length of buffer
     mavlink_message_t msg; // initialize the Madvlink message buffer
 
     mavlink_msg_set_position_target_global_int_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 0, TARGET_SYS_ID, TARGET_COMP_ID, MAV_FRAME_GLOBAL_RELATIVE_ALT_INT, (uint16_t)0b111111111000, lat_int, lon_int, alt, 0, 0, 0, 0, 0, 0, 0, 0);
+    offset_buffer(buffer, len, msg);
+    write_serial_port(buffer, len);
+}
+
+// Manual control of drone using external controller
+void send_cmd_set_attitude_target(uint8_t type_mask, const float *q, float body_roll_rate, float body_pitch_rate, float body_yaw_rate, float thrust, const float *thrust_body)
+{
+    uint16_t len = 0; // length of buffer
+    uint8_t buffer[MAVLINK_MAX_PACKET_LEN]; // define length of buffer
+    mavlink_message_t msg; // initialize the Madvlink message buffer
+
+    mavlink_msg_set_attitude_target_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 0, TARGET_SYS_ID, TARGET_COMP_ID, type_mask, q, body_roll_rate, body_pitch_rate, body_yaw_rate, thrust, thrust_body);
     offset_buffer(buffer, len, msg);
     write_serial_port(buffer, len);
 }

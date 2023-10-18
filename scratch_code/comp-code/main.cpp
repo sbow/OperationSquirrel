@@ -10,7 +10,7 @@
 #include "time_calc.h"
 
 // Test flights
-#include "sim_flight_test_1.h"
+#include "sim_flight_test_1_goToWaypoint.h"
 
 int main() 
 {
@@ -50,7 +50,7 @@ void task_25ms(int sig, siginfo_t* si, void* uc)
     std::lock_guard<std::mutex> lock(mutex);
     calcExecutionTime();
     parse_serial_data();
-    test_flight_1();
+    test_flight();
     logData();
 
     if (firstLoopAfterStartup == true)

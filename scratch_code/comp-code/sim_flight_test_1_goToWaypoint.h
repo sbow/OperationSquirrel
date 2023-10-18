@@ -26,7 +26,7 @@ void resetTimer(void)
     timerVal = 0;
 }
 
-void test_flight_1(void)
+void test_flight(void)
 {
     if (stage <= 3)
     {
