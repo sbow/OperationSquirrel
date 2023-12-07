@@ -18,11 +18,17 @@ void print_gps_global_origin(mavlink_gps_global_origin_t &gps_global_origin);
 void print_home_position(mavlink_home_position_t &home_position);
 void print_statustext(mavlink_statustext_t &statustext);
 void print_param_value(mavlink_param_value_t &param_value);
-void print_attitude(mavlink_attitude_t& attitude);
-void print_rc_channels_raw(mavlink_rc_channels_raw_t& rc_channels_raw);
-void print_local_position(mavlink_local_position_ned_t& local_position);
-void print_rc_channels_scaled(mavlink_rc_channels_scaled_t& rc_channels_scaled);
+void print_attitude(mavlink_attitude_t &attitude);
+void print_rc_channels_raw(mavlink_rc_channels_raw_t &rc_channels_raw);
+void print_local_position(mavlink_local_position_ned_t &local_position);
+void print_rc_channels_scaled(mavlink_rc_channels_scaled_t &rc_channels_scaled);
 void print_servo_output_raw(mavlink_servo_output_raw_t& servo_output_raw);
-void print_scaled_imu(mavlink_scaled_imu_t& scaled_imu);
+void print_scaled_imu(mavlink_scaled_imu_t &scaled_imu);
+void print_autopilot_version(mavlink_autopilot_version_t &autopilot_version);
+void print_attitude_quaternion(mavlink_attitude_quaternion_t &attitude_quaternion);
+void print_attitude_target(mavlink_attitude_target_t &attitude_target);
+void print_system_time(mavlink_system_time_t &system_time);
+
+//void print_protocol_capability(mavlink_protocol_capability_t& protocol_;capability);
 
 #endif // MAVLINK_PRINT_INFO_H

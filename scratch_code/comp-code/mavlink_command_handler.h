@@ -18,6 +18,6 @@ void send_command_long(uint16_t, uint16_t); // command, msg id
 void send_command_long(uint16_t, uint16_t, float); //command, msg id, message rate
 void send_command_long(uint16_t, uint8_t, float, float, float, float, float, float, float); // command, confirmation, param1 - param7
 void send_cmd_set_position_target_global_int(uint8_t, uint16_t, int32_t, int32_t, float, float, float, float, float, float, float, float, float); // coordinate_frame, type_mask, lat_int, lon_int, alt, vx, vy, vz, afx, afy, afz, yaw, yaw_rate
-void send_cmd_set_attitude_target(uint8_t, const float *, float , float , float , float , const float *); //  type_mask, *q, body_roll_rate, body_pitch_rate, body_yaw_rate, thrust, *thrust_body
+void send_cmd_set_attitude_target(mavlink_set_attitude_target_t *); //  type_mask, *q, body_roll_rate, body_pitch_rate, body_yaw_rate, thrust, *thrust_body
 
 #endif // MAVLINK_COMMAND_HANDLER_H

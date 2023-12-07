@@ -7,6 +7,7 @@
 #include <signal.h>
 #include <chrono>
 #include <ctime>
+#include <cmath>
 #include <time.h>
 #include <mutex>
 #include <common.h>

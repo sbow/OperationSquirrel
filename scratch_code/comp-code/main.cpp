@@ -10,7 +10,8 @@
 #include "time_calc.h"
 
 // Test flights
-#include "sim_flight_test_1_goToWaypoint.h"
+//#include "sim_flight_test_1_goToWaypoint.h"
+#include "sim_flight_test_2_setAttitudeTarget.h"
 
 int main() 
 {

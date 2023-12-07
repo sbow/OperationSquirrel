@@ -12,6 +12,13 @@ void print_heartbeat(mavlink_heartbeat_t &heartbeat)
     printf("\tMavlink version: %d\n", heartbeat.mavlink_version);
 }
 
+void print_system_time(mavlink_system_time_t &system_time)
+{
+    printf("System Time:\n");
+    printf("\tUnix timestamp (us): %lu\n", system_time.time_unix_usec);
+    printf("\tTime since boot (ms): %u\n", system_time.time_boot_ms);
+}
+
 void print_sys_status(mavlink_sys_status_t &sys_status) 
 {
     printf("System status:\n");
@@ -29,6 +36,8 @@ void print_sys_status(mavlink_sys_status_t &sys_status)
     printf("\tErrors count 3: %u\n", sys_status.errors_count3);
     printf("\tErrors count 4: %u\n", sys_status.errors_count4);
 }
+
+
 
 /*
 void print_gps_raw_int(mavlink_gps_raw_int_t &gps_raw_int) 
@@ -237,6 +246,76 @@ void print_param_value(mavlink_param_value_t &param_value)
     printf("\tType: %d\n", param_value.param_type);
     printf("\tCount: %d\n", param_value.param_count);
     printf("\tIndex: %d\n", param_value.param_index);
+}
+
+void print_autopilot_version(mavlink_autopilot_version_t &autopilot_version) 
+{
+    printf("Autopilot Version:\n");
+    printf("\tCapabilities: %lu\n", autopilot_version.capabilities);
+    printf("\tFlight Software Version: %lu\n", autopilot_version.flight_sw_version);
+    printf("\tMiddleware Software Version: %lu\n", autopilot_version.middleware_sw_version);
+    printf("\tOS Software Version: %lu\n", autopilot_version.os_sw_version);
+    printf("\tBoard Version: %lu\n", autopilot_version.board_version);
+    printf("\tFlight Custom Version: %lu\n", autopilot_version.flight_custom_version);
+    printf("\tMiddleware Custom Version: %lu\n", autopilot_version.middleware_custom_version);
+    printf("\tOS Custom Version: %lu\n", autopilot_version.os_custom_version);
+    /*
+    printf("\tVendor ID: ");
+    for (int i = 0; i < 20; ++i) {
+        printf("%02X ", static_cast<unsigned char>(autopilot_version.vendor_id[i]));
+    }
+    printf("\n");
+
+    printf("\tProduct ID: ");
+    for (int i = 0; i < 20; ++i) {
+        printf("%02X ", static_cast<unsigned char>(autopilot_version.product_id[i]));
+    }
+    printf("\n");
+
+    printf("\tUID: ");
+    for (int i = 0; i < 20; ++i) {
+        printf("%02X ", static_cast<unsigned char>(autopilot_version.uid[i]));
+    }
+    printf("\n");*/
+}
+
+/*
+// Function to print MAV_PROTOCOL_CAPABILITY
+void print_protocol_capability(mavlink_protocol_version_t &protocol_capability) 
+{
+   printf("Protocol Capability:\n");
+    
+    // Print decimal values
+    printf("\tLink ID: %u\n", protocol_capability.link_id);
+    printf("\tCapabilities: %lu\n", protocol_capability.capabilities);
+
+    // Print binary values using std::bitset
+    printf("\tBinary Link ID: %s\n", std::bitset<8>(protocol_capability.link_id).to_string().c_str());
+    printf("\tBinary Capabilities: %s\n", std::bitset<64>(protocol_capability.capabilities).to_string().c_str());
+}*/
+
+// Function to print ATTITUDE_TARGET
+void print_attitude_target(mavlink_attitude_target_t &attitude_target) 
+{
+    printf("Attitude Target:\n");
+    printf("\tTime Boot (ms): %lu\n", attitude_target.time_boot_ms);
+    printf("\tType Mask: %u\n", attitude_target.type_mask);
+    printf("\tQuaternion (q): [%f, %f, %f, %f]\n", attitude_target.q[0], attitude_target.q[1], attitude_target.q[2], attitude_target.q[3]);
+    printf("\tBody Roll Rate: %f\n", attitude_target.body_roll_rate);
+    printf("\tBody Pitch Rate: %f\n", attitude_target.body_pitch_rate);
+    printf("\tBody Yaw Rate: %f\n", attitude_target.body_yaw_rate);
+    printf("\tThrust: %f\n", attitude_target.thrust);
+}
+
+void print_attitude_quaternion(mavlink_attitude_quaternion_t &attitude_quaternion) 
+{
+    printf("Attitude Quaternion:\n");
+    printf("\tTime Boot (ms): %lu\n", attitude_quaternion.time_boot_ms);
+    printf("\tQuaternion (q): [%f, %f, %f, %f]\n", attitude_quaternion.q1, attitude_quaternion.q2, attitude_quaternion.q3, attitude_quaternion.q4);
+    printf("\tBody Roll Rate: %f\n", attitude_quaternion.rollspeed);
+    printf("\tBody Pitch Rate: %f\n", attitude_quaternion.pitchspeed);
+    printf("\tBody Yaw Rate: %f\n", attitude_quaternion.yawspeed);
+    printf("\tRotation offset: [%f, %f, %f, %f]\n", attitude_quaternion.repr_offset_q[0], attitude_quaternion.repr_offset_q[1], attitude_quaternion.repr_offset_q[2], attitude_quaternion.repr_offset_q[3]);
 }
 
 void print_command_ack(mavlink_command_ack_t &command_ack) 

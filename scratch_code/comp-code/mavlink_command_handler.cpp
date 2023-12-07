@@ -31,6 +31,9 @@ void startup_sequence(void)
     // Set flight mode to guided
     // enable or disable custom mode (including guided), mode # (found in mode.h), custom submode, empty, etc
     send_command_long(MAV_CMD_DO_SET_MODE, 0, MAV_MODE_FLAG_CUSTOM_MODE_ENABLED, 4, 0, 0, 0, 0, 0); // guided = 4
+
+    // Hand control over to the companion computer
+    send_command_long(MAV_CMD_NAV_GUIDED_ENABLE, 0, 1, 0, 0, 0, 0, 0, 0);
     
     // ARM the drone
     send_command_long(MAV_CMD_COMPONENT_ARM_DISARM, 0, 1, 1, 0, 0, 0, 0, 0);
@@ -99,13 +102,14 @@ void send_cmd_set_position_target_global_int(uint8_t coordinate_frame, uint16_t 
 }
 
 // Manual control of drone using external controller
-void send_cmd_set_attitude_target(uint8_t type_mask, const float *q, float body_roll_rate, float body_pitch_rate, float body_yaw_rate, float thrust, const float *thrust_body)
+void send_cmd_set_attitude_target(mavlink_set_attitude_target_t *desired_attitude_target)
 {
     uint16_t len = 0; // length of buffer
     uint8_t buffer[MAVLINK_MAX_PACKET_LEN]; // define length of buffer
     mavlink_message_t msg; // initialize the Madvlink message buffer
 
-    mavlink_msg_set_attitude_target_pack(SENDER_SYS_ID, SENDER_COMP_ID, &msg, 0, TARGET_SYS_ID, TARGET_COMP_ID, type_mask, q, body_roll_rate, body_pitch_rate, body_yaw_rate, thrust, thrust_body);
+    mavlink_msg_set_attitude_target_encode(SENDER_SYS_ID, SENDER_COMP_ID, &msg, desired_attitude_target);
     offset_buffer(buffer, len, msg);
     write_serial_port(buffer, len);
 }
+

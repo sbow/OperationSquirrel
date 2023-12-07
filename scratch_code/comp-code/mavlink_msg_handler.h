@@ -36,6 +36,25 @@ extern int16_t xmag;
 extern int16_t ymag;
 extern int16_t zmag;
 
+extern float q1_target;
+extern float q2_target;
+extern float q3_target;
+extern float q4_target;
+extern float roll_rate_target;
+extern float pitch_rate_target;
+extern float yaw_rate_target;
+extern float thrust_target;
+extern float q1_actual;
+extern float q2_actual;
+extern float q3_actual;
+extern float q4_actual;
+extern float roll_rate_actual;
+extern float pitch_rate_actual;
+extern float yaw_rate_actual;
+extern float thrust_actual;
+extern uint32_t time_since_boot_ms;
+extern uint64_t unix_timestamp_us;
+
 void set_message_rates(void);
 void request_messages(void);
 void parse_serial_data(void);
