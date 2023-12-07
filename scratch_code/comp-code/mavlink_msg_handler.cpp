@@ -95,7 +95,7 @@ void parse_serial_data(void)
                 mavlink_msg_system_time_decode(&msg, &system_time);
                 time_since_boot_ms = system_time.time_boot_ms;
                 unix_timestamp_us = system_time.time_unix_usec;
-                print_system_time(system_time);
+                //print_system_time(system_time);
                 break;
             case MAVLINK_MSG_ID_ATTITUDE:
                 mavlink_attitude_t attitude;
@@ -120,7 +120,7 @@ void parse_serial_data(void)
                 xmag = scaled_imu.xmag;
                 ymag = scaled_imu.ymag;
                 zmag = scaled_imu.zmag;
-                print_scaled_imu(scaled_imu);
+                //print_scaled_imu(scaled_imu);
                 break;
             case MAVLINK_MSG_ID_GLOBAL_POSITION_INT:
                 mavlink_global_position_int_t global_pos_int;
@@ -138,7 +138,7 @@ void parse_serial_data(void)
             case MAVLINK_MSG_ID_COMMAND_ACK:
                 mavlink_command_ack_t command_ack;
                 mavlink_msg_command_ack_decode(&msg, &command_ack);
-                print_command_ack(command_ack);
+                //print_command_ack(command_ack);
                 break;
             case MAVLINK_MSG_ID_PARAM_REQUEST_READ:
                 mavlink_param_request_read_t param_request_read;
@@ -183,7 +183,7 @@ void parse_serial_data(void)
             case MAVLINK_MSG_ID_AUTOPILOT_VERSION:
                 mavlink_autopilot_version_t autopilot_version;
                 mavlink_msg_autopilot_version_decode(&msg, &autopilot_version);
-                print_autopilot_version(autopilot_version);
+                //print_autopilot_version(autopilot_version);
                 break;
             case MAVLINK_MSG_ID_ATTITUDE_TARGET:
                 mavlink_attitude_target_t attitude_target;

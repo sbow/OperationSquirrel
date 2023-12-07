@@ -1,5 +1,6 @@
 #include "mavlink_command_handler.h"
 
+// Examples of commands than can be sent
 // MAV_CMD_DO_MOTOR_TEST instance, MOTOR_TEST_THROTTLE_TYPE, throttle, timeout, motor count, test order, empty
 // MAV_CMD_DO_FENCE_ENABLE enable, empty, etc
 // MAV_CMD_DO_SET_ROI, ROI mode, WP index, ROI index, empty, MAV_ROI__WPNEXT pitch, MAV_ROI__WPNEXT roll, MAV_ROI__WPNEXT yaw
@@ -8,12 +9,6 @@
 // MAV_CMD_DO_SET_HOME 1 use current 0 use specified, empty, empty, yaw (NAN for default), lat, lon, altitude
 // MAV_CMD_DO_CHANGE_SPEED speed type, speed, throttle. reserved, etc (all set 0)
 // MAV_CMD_NAV_GUIDED_ENABLE enable (> 05f on), empty, etc
-
-const uint8_t SENDER_SYS_ID = 0;
-const uint8_t SENDER_COMP_ID = 0;
-const uint8_t TARGET_SYS_ID = 1;
-const uint8_t TARGET_COMP_ID = 1;
-const int32_t MESSAGE_INTERVAL = 12.5e3; // microseconds
 
 void msg_handler(uint16_t mavlink_command, uint16_t msg_id, float msg_interval) 
 {
